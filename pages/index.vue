@@ -5,6 +5,19 @@
     </div>
 </template>
 
+<script setup>
+onMounted(() => {
+    console.log('wuala');
+    test();
+});
+
+const test = async () => {
+    let response = await useAxios().$get('/api/wedding');
+
+    console.log('lala', response);
+};
+</script>
+
 <style lang="scss" scoped>
 .welcome {
     text-align: center;

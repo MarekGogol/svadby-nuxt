@@ -2,8 +2,10 @@
     <div class="container">
         <div class="wrapper">
             <header>
-                <h1>Simona & Marek</h1>
-                <div class="wedding-date">August 15, 2024</div>
+                <h1>{{ wedding.wedding?.name || 'Loading...' }}</h1>
+                <div class="wedding-date">
+                    {{ moment(wedding.wedding?.date).format('D MMMM Y') }}
+                </div>
                 <div class="divider">
                     <span>❦</span>
                 </div>
@@ -20,7 +22,12 @@
 </template>
 
 <script setup>
+import moment from 'moment';
 import Menu from '~/components/Menu.vue';
+import { useWedding } from '~/stores/wedding';
+import { onMounted } from 'vue';
+
+const wedding = useWedding();
 </script>
 
 <style lang="scss" scoped>
