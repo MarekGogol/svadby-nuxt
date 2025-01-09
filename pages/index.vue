@@ -2,7 +2,7 @@
     <div class="container">
         <div class="wrapper">
             <header>
-                <h1>Sarah & Michael</h1>
+                <h1>Simona & Marek</h1>
                 <div class="wedding-date">August 15, 2024</div>
                 <div class="divider">
                     <span>❦</span>
