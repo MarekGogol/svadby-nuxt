@@ -44,35 +44,28 @@
             <div class="photos-grid">
                 <div v-for="photo in [...photos, ...galleryPhotos]" :key="photo.id" class="photo-item">
                     <div class="photo-container">
-                        <img :src="photo.image" :alt="photo.title">
+                        <img
+                            loading="lazy"
+                            :src="photo.image"
+                            :alt="photo.title"
+                        >
                         <div class="photo-title">{{ photo.title }}</div>
                     </div>
                 </div>
             </div>
 
-            <div v-if="pagination" class="pagination-wrapper">
-                <div class="pagination">
-                    <button
-                        class="page-link"
-                        :disabled="!pagination.from"
-                        @click="loadPage(pagination.current_page - 1)"
-                    >
-                        Previous
-                    </button>
-
-                    <div class="page-info">
-                        {{ pagination.from }}-{{ pagination.to }} of {{ pagination.total }}
-                    </div>
-
-                    <button
-                        class="page-link"
-                        :disabled="pagination.to === pagination.total"
-                        @click="loadPage(pagination.current_page + 1)"
-                    >
-                        Next
-                    </button>
-                </div>
+            <div
+                v-if="isLoading"
+                class="loading-wrapper"
+            >
+                Loading more photos...
             </div>
+
+            <div
+                v-if="hasMorePages"
+                ref="loadMoreTrigger"
+                class="load-more-trigger"
+            ></div>
         </div>
     </div>
 </template>
@@ -86,25 +79,52 @@ const photoTitle = ref('');
 const uploading = ref(false);
 const uploadProgress = ref(0);
 const pagination = ref(null);
+const isLoading = ref(false);
+const loadMoreTrigger = ref(null);
+
+const hasMorePages = computed(() => {
+    if (!pagination.value) return false;
+    return pagination.value.current_page < pagination.value.last_page;
+});
 
 const loadPage = async (page) => {
+    if (isLoading.value) return;
+
+    isLoading.value = true;
     try {
         const { data } = await useAxios().$get('/api/wedding/photos', {
             params: { page }
         });
 
         if (data?.pagination?.data) {
-            galleryPhotos.value = data?.pagination.data;
-
-            pagination.value = data?.pagination;
+            if (page === 1) {
+                galleryPhotos.value = data.pagination.data;
+            } else {
+                galleryPhotos.value = [...galleryPhotos.value, ...data.pagination.data];
+            }
+            pagination.value = data.pagination;
         }
     } catch (error) {
         console.error('Failed to fetch photos:', error);
+    } finally {
+        isLoading.value = false;
     }
 };
 
 onMounted(async () => {
     await loadPage(1);
+
+    const observer = new IntersectionObserver(async ([entry]) => {
+        if (entry.isIntersecting && hasMorePages.value && !isLoading.value) {
+            await loadPage(pagination.value.current_page + 1);
+        }
+    }, {
+        rootMargin: '100px'
+    });
+
+    if (loadMoreTrigger.value) {
+        observer.observe(loadMoreTrigger.value);
+    }
 });
 
 const triggerFileInput = () => {
@@ -336,48 +356,17 @@ const handleDrop = (event) => {
         }
     }
 
-    .pagination-wrapper {
-        margin-top: 2rem;
-        display: flex;
-        justify-content: center;
+    .loading-wrapper {
+        text-align: center;
+        padding: 2rem;
+        color: #666;
+        font-family: 'Times New Roman', serif;
+        font-size: 0.9rem;
     }
 
-    .pagination {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem;
-        background: white;
-        border-radius: 0.5rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-
-        .page-link {
-            padding: 0.5rem 1rem;
-            border: 1px solid #eee;
-            border-radius: 0.25rem;
-            background: white;
-            color: #666;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: 'Times New Roman', serif;
-            font-size: 0.9rem;
-
-            &:hover:not(:disabled) {
-                background: #f8f8f8;
-                border-color: #ddd;
-            }
-
-            &:disabled {
-                opacity: 0.5;
-                cursor: not-allowed;
-            }
-        }
-
-        .page-info {
-            color: #666;
-            font-family: 'Times New Roman', serif;
-            font-size: 0.9rem;
-        }
+    .load-more-trigger {
+        height: 20px;
+        margin-top: 2rem;
     }
 }
 </style>
