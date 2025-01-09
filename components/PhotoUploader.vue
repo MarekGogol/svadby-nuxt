@@ -1,5 +1,14 @@
 <template>
     <div class="photo-uploader">
+        <div class="title-input-wrapper">
+            <input
+                v-model="photoTitle"
+                type="text"
+                placeholder="Add a title for your next photo (optional)"
+                class="title-input"
+            >
+        </div>
+
         <div class="upload-area" @click="triggerFileInput" @drop.prevent="handleDrop" @dragover.prevent>
             <input
                 type="file"
@@ -8,39 +17,35 @@
                 accept="image/*"
                 class="hidden"
             >
-            <div class="upload-prompt">
+            <div v-if="!uploading" class="upload-prompt">
                 <span class="icon">📸</span>
                 <p>Click or drag image here to upload</p>
             </div>
-        </div>
-
-        <div v-if="selectedFile" class="upload-form">
-            <div class="form-group">
-                <input
-                    v-model="photoTitle"
-                    type="text"
-                    placeholder="Add a title (optional)"
-                    class="title-input"
-                >
-                <button @click="uploadPhoto" class="upload-button" :disabled="uploading">
-                    {{ uploading ? 'Uploading...' : 'Upload Photo' }}
-                </button>
-            </div>
-            <div class="selected-file">
-                Selected: {{ selectedFile.name }}
-            </div>
-            <div v-if="uploading" class="progress-wrapper">
-                <div class="progress-bar">
-                    <div class="progress-fill" :style="{ width: `${uploadProgress}%` }"></div>
+            <div v-else class="upload-status">
+                <div class="progress-wrapper">
+                    <div class="progress-bar">
+                        <div class="progress-fill" :style="{ width: `${uploadProgress}%` }"></div>
+                    </div>
+                    <div class="progress-text">{{ uploadProgress }}%</div>
                 </div>
-                <div class="progress-text">{{ uploadProgress }}%</div>
+                <div class="selected-file">
+                    Uploading: {{ selectedFile?.name }}
+                </div>
             </div>
         </div>
 
-        <div v-if="photos.length" class="photos-grid">
-            <div v-for="photo in photos" :key="photo.id" class="photo-item">
-                <img :src="photo.image" :alt="photo.title">
-                <div class="photo-title">{{ photo.title }}</div>
+        <div v-if="photos.length || galleryPhotos.length" class="gallery-section">
+            <div class="section-divider">
+                <hr>
+                <span>Photo Gallery</span>
+                <hr>
+            </div>
+
+            <div class="photos-grid">
+                <div v-for="photo in [...photos, ...galleryPhotos]" :key="photo.id" class="photo-item">
+                    <img :src="photo.image" :alt="photo.title">
+                    <div class="photo-title">{{ photo.title }}</div>
+                </div>
             </div>
         </div>
     </div>
@@ -49,21 +54,32 @@
 <script setup>
 const fileInput = ref(null);
 const photos = ref([]);
+const galleryPhotos = ref([]);
 const selectedFile = ref(null);
 const photoTitle = ref('');
 const uploading = ref(false);
 const uploadProgress = ref(0);
 
+onMounted(async () => {
+    try {
+        const { data } = await useAxios().$get('/api/wedding/photos');
+        galleryPhotos.value = data.photos;
+    } catch (error) {
+        console.error('Failed to fetch photos:', error);
+    }
+});
+
 const triggerFileInput = () => {
     fileInput.value.click();
 };
 
-const uploadPhoto = async () => {
-    if (!selectedFile.value) return;
+const uploadPhoto = async (file) => {
+    if (!file) return;
 
+    selectedFile.value = file;
     const formData = new FormData();
-    formData.append('title', photoTitle.value || selectedFile.value.name);
-    formData.append('image', selectedFile.value);
+    formData.append('title', photoTitle.value || file.name);
+    formData.append('image', file);
 
     uploading.value = true;
     uploadProgress.value = 0;
@@ -82,35 +98,59 @@ const uploadPhoto = async () => {
                 }
             });
 
-        photos.value.push(data.file);
+        photos.value.unshift(data.file);
         // Reset form
-        selectedFile.value = null;
         photoTitle.value = '';
     } catch (error) {
         console.error('Upload failed:', error);
     } finally {
         uploading.value = false;
         uploadProgress.value = 0;
+        selectedFile.value = null;
     }
 };
 
 const handleFileSelect = (event) => {
     const file = event.target.files[0];
     if (file) {
-        selectedFile.value = file;
+        uploadPhoto(file);
     }
 };
 
 const handleDrop = (event) => {
     const file = event.dataTransfer.files[0];
     if (file) {
-        selectedFile.value = file;
+        uploadPhoto(file);
     }
 };
 </script>
 
 <style lang="scss" scoped>
 .photo-uploader {
+    .title-input-wrapper {
+        margin-bottom: 1rem;
+    }
+
+    .title-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+        font-family: 'Lato', sans-serif;
+        font-size: 0.95rem;
+        transition: all 0.3s;
+
+        &:focus {
+            outline: none;
+            border-color: #d4756d;
+            box-shadow: 0 0 0 2px rgba(#d4756d, 0.1);
+        }
+
+        &::placeholder {
+            color: #999;
+        }
+    }
+
     .upload-area {
         border: 2px dashed #d4756d;
         border-radius: 1rem;
@@ -118,9 +158,17 @@ const handleDrop = (event) => {
         text-align: center;
         cursor: pointer;
         transition: all 0.3s;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        &:hover {
+        &:hover:not(.uploading) {
             background-color: rgba(#d4756d, 0.05);
+        }
+
+        &.uploading {
+            cursor: default;
         }
     }
 
@@ -141,60 +189,14 @@ const handleDrop = (event) => {
         }
     }
 
-    .upload-form {
-        margin-top: 1rem;
-        padding: 1rem;
-        background: #f8f8f8;
-        border-radius: 0.5rem;
-
-        .form-group {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .title-input {
-            flex: 1;
-            padding: 0.5rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 0.5rem;
-            font-family: 'Lato', sans-serif;
-
-            &:focus {
-                outline: none;
-                border-color: #d4756d;
-            }
-        }
-
-        .upload-button {
-            padding: 0.5rem 1.5rem;
-            background: #d4756d;
-            color: white;
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-
-            &:hover:not(:disabled) {
-                background: darken(#d4756d, 5%);
-            }
-
-            &:disabled {
-                background: #ccc;
-                cursor: not-allowed;
-            }
-        }
-
-        .selected-file {
-            font-size: 0.9rem;
-            color: #666;
-        }
+    .upload-status {
+        width: 100%;
 
         .progress-wrapper {
-            margin-top: 1rem;
             display: flex;
             align-items: center;
             gap: 1rem;
+            margin-bottom: 1rem;
         }
 
         .progress-bar {
@@ -216,13 +218,43 @@ const handleDrop = (event) => {
             color: #666;
             min-width: 3.5rem;
         }
+
+        .selected-file {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    }
+
+    .gallery-section {
+        margin-top: 2rem;
+    }
+
+    .section-divider {
+        display: flex;
+        align-items: center;
+        margin: 2rem 0;
+        color: #666;
+
+        hr {
+            flex: 1;
+            border: none;
+            height: 1px;
+            background: #ddd;
+        }
+
+        span {
+            padding: 0 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #666;
+            font-family: 'Lato', sans-serif;
+        }
     }
 
     .photos-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 1rem;
-        margin-top: 2rem;
     }
 
     .photo-item {
