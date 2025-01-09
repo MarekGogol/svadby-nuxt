@@ -1,13 +1,15 @@
 <template>
     <div class="container">
-        <div class="wrapper">
+        <div class="side-text">S & M</div>
+        <div class="content-wrapper">
             <header>
-                <h1>{{ wedding.wedding?.name || 'Loading...' }}</h1>
-                <div class="wedding-date">
-                    {{ moment(wedding.wedding?.date).format('D MMMM Y') }}
-                </div>
-                <div class="divider">
-                    <span>❦</span>
+                <div class="date">SEPTEMBER 21, 2024</div>
+                <div class="names">
+                    ŠIMONA
+                    <br />
+                    &
+                    <br />
+                    MAREK
                 </div>
             </header>
 
@@ -23,91 +25,79 @@
 
 <script setup>
 import moment from 'moment';
-
 const wedding = useWedding();
 </script>
 
 <style lang="scss" scoped>
-$primary-color: #f8e8e8;
-$secondary-color: #fff5f5;
-$accent-color: #d4756d;
-$text-color: #2c3e50;
-
 .container {
     min-height: 100vh;
-    background-color: $secondary-color;
-    padding: 1rem;
+    position: relative;
+    display: flex;
+    padding: 0;
+}
 
-    @media (min-width: 768px) {
-        padding: 2rem;
+.side-text {
+    position: fixed;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-family: 'Times New Roman', serif;
+    font-size: 1rem;
+    color: #999;
+    letter-spacing: 0.5rem;
+    white-space: nowrap;
+    display: none;
+
+    @media (min-width: 1200px) {
+        display: block;
     }
 }
 
-.wrapper {
-    max-width: 600px;
+.content-wrapper {
+    flex: 1;
+    max-width: 1000px;
     margin: 0 auto;
+    padding: 2rem;
 }
 
 header {
     text-align: center;
-    margin-bottom: 2rem;
-    padding: 2rem 1rem;
+    margin-bottom: 4rem;
+    padding: 4rem 1rem;
 
-    h1 {
-        font-family: 'Great Vibes', cursive;
-        font-size: 3rem;
-        color: $accent-color;
-        margin-bottom: 0.5rem;
+    .date {
+        font-family: 'Times New Roman', serif;
+        font-size: 0.875rem;
+        color: #999;
+        letter-spacing: 0.25rem;
+        margin-bottom: 2rem;
+    }
+
+    .names {
+        font-family: 'Times New Roman', serif;
+        font-size: 3.5rem;
         line-height: 1.2;
+        color: #000;
+        font-weight: normal;
 
         @media (min-width: 768px) {
-            font-size: 4rem;
-        }
-    }
-
-    .wedding-date {
-        font-family: 'Lato', sans-serif;
-        font-size: 1.2rem;
-        color: $text-color;
-        margin-bottom: 1rem;
-        font-weight: 300;
-        letter-spacing: 2px;
-    }
-
-    .divider {
-        position: relative;
-        height: 1px;
-        background-color: $accent-color;
-        opacity: 0.3;
-        width: 80%;
-        max-width: 200px;
-        margin: 1rem auto;
-
-        span {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: $secondary-color;
-            padding: 0 1rem;
-            color: $accent-color;
-            font-size: 1.5rem;
+            font-size: 5rem;
         }
     }
 }
 
 .content {
     background-color: white;
-    border-radius: 1rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
+    border: none;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .page-content {
-    padding: 1.5rem 1rem;
+    padding: 2rem;
 
     @media (min-width: 768px) {
-        padding: 2rem;
+        padding: 3rem;
     }
 }
 </style>

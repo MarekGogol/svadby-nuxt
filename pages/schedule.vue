@@ -1,5 +1,11 @@
 <template>
-    <TabB />
+    <div>
+        <TabB />
+    </div>
 </template>
 
-<script setup></script>
+<script setup>
+definePageMeta({
+    keepalive: true
+});
+</script>

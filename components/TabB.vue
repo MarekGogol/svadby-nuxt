@@ -1,11 +1,9 @@
 <template>
-    <div class="content-section">
-        <h2>Wedding Day Timeline</h2>
-        <div class="schedule">
+    <div class="timeline">
+        <div class="timeline-title">THE DAY OF</div>
+        <div class="events">
             <div v-for="(event, index) in events" :key="index" class="event">
-                <div class="time">
-                    <span>{{ event.time }}</span>
-                </div>
+                <div class="time">{{ event.time }}</div>
                 <div class="details">
                     <h3>{{ event.title }}</h3>
                     <p>{{ event.description }}</p>
@@ -36,71 +34,53 @@ const events = [
 </script>
 
 <style lang="scss" scoped>
-$primary-color: #f8e8e8;
-$secondary-color: #fff5f5;
-$accent-color: #d4756d;
-$text-color: #2c3e50;
-
-.content-section {
-    h2 {
-        font-family: 'Great Vibes', cursive;
-        font-size: 2.5rem;
-        color: $accent-color;
-        margin-bottom: 2rem;
+.timeline {
+    .timeline-title {
+        font-family: 'Times New Roman', serif;
+        font-size: 0.875rem;
+        color: #999;
+        letter-spacing: 0.2rem;
         text-align: center;
-    }
-}
-
-.schedule {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.event {
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem;
-    background-color: $secondary-color;
-    border-radius: 1rem;
-    text-align: center;
-
-    @media (min-width: 768px) {
-        flex-direction: row;
-        text-align: left;
-        align-items: center;
+        margin-bottom: 3rem;
     }
 
-    .time {
-        margin-bottom: 0.5rem;
-
-        @media (min-width: 768px) {
-            width: 6rem;
-            margin-bottom: 0;
-        }
-
-        span {
-            font-size: 1.125rem;
-            font-weight: 500;
-            color: $accent-color;
-        }
+    .events {
+        max-width: 600px;
+        margin: 0 auto;
     }
 
-    .details {
-        flex-grow: 1;
+    .event {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 2rem;
+        padding: 2rem 0;
+        border-bottom: 1px solid #eee;
 
-        h3 {
-            font-size: 1.25rem;
-            font-family: 'Lato', sans-serif;
-            color: $accent-color;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+        &:last-child {
+            border-bottom: none;
         }
 
-        p {
-            color: $text-color;
-            margin: 0;
-            font-weight: 300;
+        .time {
+            font-family: 'Times New Roman', serif;
+            font-size: 0.875rem;
+            color: #999;
+        }
+
+        .details {
+            h3 {
+                font-family: 'Times New Roman', serif;
+                font-size: 1.25rem;
+                color: #000;
+                margin-bottom: 0.5rem;
+                font-weight: normal;
+            }
+
+            p {
+                font-family: 'Times New Roman', serif;
+                font-size: 1rem;
+                color: #666;
+                line-height: 1.5;
+            }
         }
     }
 }

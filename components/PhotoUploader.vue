@@ -43,8 +43,10 @@
 
             <div class="photos-grid">
                 <div v-for="photo in [...photos, ...galleryPhotos]" :key="photo.id" class="photo-item">
-                    <img :src="photo.image" :alt="photo.title">
-                    <div class="photo-title">{{ photo.title }}</div>
+                    <div class="photo-container">
+                        <img :src="photo.image" :alt="photo.title">
+                        <div class="photo-title">{{ photo.title }}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -63,7 +65,9 @@ const uploadProgress = ref(0);
 onMounted(async () => {
     try {
         const { data } = await useAxios().$get('/api/wedding/photos');
-        galleryPhotos.value = data.photos;
+        if (data && data.photos) {
+            galleryPhotos.value = data.photos;
+        }
     } catch (error) {
         console.error('Failed to fetch photos:', error);
     }
@@ -98,8 +102,9 @@ const uploadPhoto = async (file) => {
                 }
             });
 
-        photos.value.unshift(data.file);
-        // Reset form
+        if (data && data.file) {
+            photos.value.unshift(data.file);
+        }
         photoTitle.value = '';
     } catch (error) {
         console.error('Upload failed:', error);
@@ -258,25 +263,39 @@ const handleDrop = (event) => {
     }
 
     .photo-item {
-        border-radius: 0.5rem;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-        img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .photo-title {
-            padding: 0.5rem;
-            background: white;
-            font-size: 0.9rem;
-            color: #2c3e50;
-            text-align: center;
-            white-space: nowrap;
+        .photo-container {
+            position: relative;
+            border-radius: 0.5rem;
             overflow: hidden;
-            text-overflow: ellipsis;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+            img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                display: block;
+            }
+
+            .photo-title {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 0.5rem;
+                transform: translateY(100%);
+                transition: transform 0.3s ease;
+                font-size: 0.9rem;
+                color: #2c3e50;
+                text-align: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            &:hover .photo-title {
+                transform: translateY(0);
+            }
         }
     }
 }
