@@ -1,251 +1,251 @@
-<script setup>
-import { ref } from 'vue';
-
-const isDragging = ref(false);
-const files = ref([]);
-
-const handleDrop = (e) => {
-    e.preventDefault();
-    isDragging.value = false;
-
-    const newFiles = Array.from(e.dataTransfer.files);
-    files.value = [...files.value, ...newFiles];
-};
-
-const handleDragOver = (e) => {
-    e.preventDefault();
-    isDragging.value = true;
-};
-
-const handleDragLeave = () => {
-    isDragging.value = false;
-};
-
-const removeFile = (index) => {
-    files.value.splice(index, 1);
-};
-
-const uploadFiles = () => {
-    // Here you would implement the actual file upload logic
-    console.log('Uploading files:', files.value);
-};
-</script>
-
 <template>
-    <div class="content-section">
-        <h2>Share Your Moments! 📸</h2>
-
-        <div
-            class="upload-zone"
-            :class="{ dragging: isDragging }"
-            @drop="handleDrop"
-            @dragover="handleDragOver"
-            @dragleave="handleDragLeave"
-        >
-            <div class="upload-content">
-                <div class="camera-icon">📸</div>
-                <h3>Drop Your Photos Here!</h3>
-                <p>Or click to select files</p>
-                <div class="hearts">
-                    <span class="heart">💖</span>
-                    <span class="heart">💝</span>
-                    <span class="heart">💗</span>
-                </div>
+    <div class="photo-uploader">
+        <div class="upload-area" @click="triggerFileInput" @drop.prevent="handleDrop" @dragover.prevent>
+            <input
+                type="file"
+                ref="fileInput"
+                @change="handleFileSelect"
+                accept="image/*"
+                class="hidden"
+            >
+            <div class="upload-prompt">
+                <span class="icon">📸</span>
+                <p>Click or drag image here to upload</p>
             </div>
         </div>
 
-        <div v-if="files.length" class="files-preview">
-            <h4>Selected Photos ({{ files.length }})</h4>
-            <div class="file-list">
-                <div
-                    v-for="(file, index) in files"
-                    :key="index"
-                    class="file-item"
+        <div v-if="selectedFile" class="upload-form">
+            <div class="form-group">
+                <input
+                    v-model="photoTitle"
+                    type="text"
+                    placeholder="Add a title (optional)"
+                    class="title-input"
                 >
-                    <span class="file-name">{{ file.name }}</span>
-                    <button @click="removeFile(index)" class="remove-btn">
-                        ❌
-                    </button>
-                </div>
+                <button @click="uploadPhoto" class="upload-button" :disabled="uploading">
+                    {{ uploading ? 'Uploading...' : 'Upload Photo' }}
+                </button>
             </div>
-            <button @click="uploadFiles" class="upload-btn">
-                Upload Photos 🚀
-            </button>
+            <div class="selected-file">
+                Selected: {{ selectedFile.name }}
+            </div>
+            <div v-if="uploading" class="progress-wrapper">
+                <div class="progress-bar">
+                    <div class="progress-fill" :style="{ width: `${uploadProgress}%` }"></div>
+                </div>
+                <div class="progress-text">{{ uploadProgress }}%</div>
+            </div>
+        </div>
+
+        <div v-if="photos.length" class="photos-grid">
+            <div v-for="photo in photos" :key="photo.id" class="photo-item">
+                <img :src="photo.image" :alt="photo.title">
+                <div class="photo-title">{{ photo.title }}</div>
+            </div>
         </div>
     </div>
 </template>
 
+<script setup>
+const fileInput = ref(null);
+const photos = ref([]);
+const selectedFile = ref(null);
+const photoTitle = ref('');
+const uploading = ref(false);
+const uploadProgress = ref(0);
+
+const triggerFileInput = () => {
+    fileInput.value.click();
+};
+
+const uploadPhoto = async () => {
+    if (!selectedFile.value) return;
+
+    const formData = new FormData();
+    formData.append('title', photoTitle.value || selectedFile.value.name);
+    formData.append('image', selectedFile.value);
+
+    uploading.value = true;
+    uploadProgress.value = 0;
+
+    try {
+        const { data } = await useAxios()
+            .$post('/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                onUploadProgress: (progressEvent) => {
+                    const percentCompleted = Math.round(
+                        (progressEvent.loaded * 100) / progressEvent.total
+                    );
+                    uploadProgress.value = percentCompleted;
+                }
+            });
+
+        photos.value.push(data.file);
+        // Reset form
+        selectedFile.value = null;
+        photoTitle.value = '';
+    } catch (error) {
+        console.error('Upload failed:', error);
+    } finally {
+        uploading.value = false;
+        uploadProgress.value = 0;
+    }
+};
+
+const handleFileSelect = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        selectedFile.value = file;
+    }
+};
+
+const handleDrop = (event) => {
+    const file = event.dataTransfer.files[0];
+    if (file) {
+        selectedFile.value = file;
+    }
+};
+</script>
+
 <style lang="scss" scoped>
-$primary-color: #f8e8e8;
-$secondary-color: #fff5f5;
-$accent-color: #d4756d;
-$text-color: #2c3e50;
-
-.content-section {
-    h2 {
-        font-family: 'Great Vibes', cursive;
-        font-size: 2.5rem;
-        color: $accent-color;
-        margin-bottom: 2rem;
+.photo-uploader {
+    .upload-area {
+        border: 2px dashed #d4756d;
+        border-radius: 1rem;
+        padding: 2rem;
         text-align: center;
-    }
-}
-
-.upload-zone {
-    min-height: 300px;
-    border: 3px dashed lighten($accent-color, 20%);
-    border-radius: 1rem;
-    background-color: $secondary-color;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-
-    &:hover,
-    &.dragging {
-        border-color: $accent-color;
-        background-color: lighten($primary-color, 2%);
-        transform: scale(1.01);
-
-        .heart {
-            animation: float 2s ease-in-out infinite;
-        }
-    }
-}
-
-.upload-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    min-height: 300px;
-    padding: 2rem;
-    text-align: center;
-
-    .camera-icon {
-        font-size: 4rem;
-        margin-bottom: 1rem;
-        animation: bounce 2s infinite;
-    }
-
-    h3 {
-        font-size: 1.5rem;
-        color: $accent-color;
-        margin-bottom: 0.5rem;
-        font-family: 'Lato', sans-serif;
-    }
-
-    p {
-        color: lighten($text-color, 20%);
-        margin-bottom: 1rem;
-    }
-}
-
-.hearts {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-
-    .heart {
-        font-size: 1.5rem;
-        transition: all 0.3s ease;
-
-        &:nth-child(1) {
-            animation-delay: 0s;
-        }
-        &:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-        &:nth-child(3) {
-            animation-delay: 1s;
-        }
-    }
-}
-
-.files-preview {
-    margin-top: 2rem;
-    padding: 1rem;
-    background-color: white;
-    border-radius: 1rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-
-    h4 {
-        color: $accent-color;
-        margin-bottom: 1rem;
-        font-family: 'Lato', sans-serif;
-    }
-}
-
-.file-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.file-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    background-color: $secondary-color;
-    border-radius: 0.5rem;
-
-    .file-name {
-        font-size: 0.9rem;
-        color: $text-color;
-    }
-
-    .remove-btn {
-        background: none;
-        border: none;
         cursor: pointer;
-        font-size: 1rem;
-        padding: 0.2rem;
-        opacity: 0.7;
-        transition: opacity 0.3s;
+        transition: all 0.3s;
 
         &:hover {
-            opacity: 1;
+            background-color: rgba(#d4756d, 0.05);
         }
     }
-}
 
-.upload-btn {
-    width: 100%;
-    padding: 1rem;
-    background-color: $accent-color;
-    color: white;
-    border: none;
-    border-radius: 2rem;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.3s;
+    .hidden {
+        display: none;
+    }
 
-    &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba($accent-color, 0.3);
-    }
-}
+    .upload-prompt {
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
 
-@keyframes bounce {
-    0%,
-    100% {
-        transform: translateY(0);
+        p {
+            color: #666;
+            margin: 0;
+        }
     }
-    50% {
-        transform: translateY(-10px);
-    }
-}
 
-@keyframes float {
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg);
+    .upload-form {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f8f8f8;
+        border-radius: 0.5rem;
+
+        .form-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .title-input {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            font-family: 'Lato', sans-serif;
+
+            &:focus {
+                outline: none;
+                border-color: #d4756d;
+            }
+        }
+
+        .upload-button {
+            padding: 0.5rem 1.5rem;
+            background: #d4756d;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+
+            &:hover:not(:disabled) {
+                background: darken(#d4756d, 5%);
+            }
+
+            &:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+        }
+
+        .selected-file {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .progress-wrapper {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #d4756d;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: #666;
+            min-width: 3.5rem;
+        }
     }
-    50% {
-        transform: translateY(-10px) rotate(10deg);
+
+    .photos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .photo-item {
+        border-radius: 0.5rem;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .photo-title {
+            padding: 0.5rem;
+            background: white;
+            font-size: 0.9rem;
+            color: #2c3e50;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 }
 </style>
