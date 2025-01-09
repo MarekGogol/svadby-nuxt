@@ -1,19 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
-  devtools: { enabled: true },
-  modules: [
-    '@pinia/nuxt',
-  ],
-  components: {
-    dirs: [
-      {
-        path: '~/components',
-        pathPrefix: false,
-      },
-    ],
-  },
-  imports: {
-    dirs: ['stores'],
-  },
-})
+    ssr: false,
+    compatibilityDate: '2024-11-01',
+    devtools: { enabled: true },
+    modules: ['@pinia/nuxt'],
+    components: {
+        dirs: [
+            {
+                path: '~/components',
+                pathPrefix: false,
+            },
+        ],
+    },
+    imports: {
+        dirs: ['stores'],
+    },
+});
