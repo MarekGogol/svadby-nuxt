@@ -1,15 +1,11 @@
 <template>
     <div class="container">
-        <div class="side-text">S & M</div>
+        <div class="side-text">{{ formatSideText(wedding.wedding?.name) }}</div>
         <div class="content-wrapper">
             <header>
-                <div class="date">SEPTEMBER 21, 2024</div>
-                <div class="names">
-                    ŠIMONA
-                    <br />
-                    &
-                    <br />
-                    MAREK
+                <div class="date">{{ formattedDate }}</div>
+                <div class="names" v-if="wedding.wedding?.name">
+                    {{ formatNames(wedding.wedding.name) }}
                 </div>
             </header>
 
@@ -26,6 +22,26 @@
 <script setup>
 import moment from 'moment';
 const wedding = useWedding();
+
+const formattedDate = computed(() => {
+    if (!wedding.wedding?.date) return '';
+    return moment(wedding.wedding.date).format('MMMM D, YYYY').toUpperCase();
+});
+
+const formatNames = (name) => {
+    if (!name) return '';
+    return name.split('&').map(part =>
+        part.trim().toUpperCase()
+    ).join('\n&\n');
+};
+
+const formatSideText = (name) => {
+    if (!name) return 'S & M';
+    return name
+        .split(/\s+/)
+        .map(word => word.charAt(0))
+        .join(' ');
+};
 </script>
 
 <style lang="scss" scoped>
