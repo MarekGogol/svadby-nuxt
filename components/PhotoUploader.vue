@@ -49,6 +49,30 @@
                     </div>
                 </div>
             </div>
+
+            <div v-if="pagination" class="pagination-wrapper">
+                <div class="pagination">
+                    <button
+                        class="page-link"
+                        :disabled="!pagination.from"
+                        @click="loadPage(pagination.current_page - 1)"
+                    >
+                        Previous
+                    </button>
+
+                    <div class="page-info">
+                        {{ pagination.from }}-{{ pagination.to }} of {{ pagination.total }}
+                    </div>
+
+                    <button
+                        class="page-link"
+                        :disabled="pagination.to === pagination.total"
+                        @click="loadPage(pagination.current_page + 1)"
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -61,16 +85,26 @@ const selectedFile = ref(null);
 const photoTitle = ref('');
 const uploading = ref(false);
 const uploadProgress = ref(0);
+const pagination = ref(null);
 
-onMounted(async () => {
+const loadPage = async (page) => {
     try {
-        const { data } = await useAxios().$get('/api/wedding/photos');
-        if (data && data.photos) {
-            galleryPhotos.value = data.photos;
+        const { data } = await useAxios().$get('/api/wedding/photos', {
+            params: { page }
+        });
+
+        if (data?.pagination?.data) {
+            galleryPhotos.value = data?.pagination.data;
+
+            pagination.value = data?.pagination;
         }
     } catch (error) {
         console.error('Failed to fetch photos:', error);
     }
+};
+
+onMounted(async () => {
+    await loadPage(1);
 });
 
 const triggerFileInput = () => {
@@ -104,6 +138,9 @@ const uploadPhoto = async (file) => {
 
         if (data && data.file) {
             photos.value.unshift(data.file);
+            if (pagination.value?.current_page !== 1) {
+                await loadPage(1);
+            }
         }
         photoTitle.value = '';
     } catch (error) {
@@ -296,6 +333,50 @@ const handleDrop = (event) => {
             &:hover .photo-title {
                 transform: translateY(0);
             }
+        }
+    }
+
+    .pagination-wrapper {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+        .page-link {
+            padding: 0.5rem 1rem;
+            border: 1px solid #eee;
+            border-radius: 0.25rem;
+            background: white;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Times New Roman', serif;
+            font-size: 0.9rem;
+
+            &:hover:not(:disabled) {
+                background: #f8f8f8;
+                border-color: #ddd;
+            }
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        }
+
+        .page-info {
+            color: #666;
+            font-family: 'Times New Roman', serif;
+            font-size: 0.9rem;
         }
     }
 }
