@@ -120,8 +120,8 @@ const handleDrop = (event) => {
 
         &:focus {
             outline: none;
-            border-color: #d4756d;
-            box-shadow: 0 0 0 2px rgba(#d4756d, 0.1);
+            border-color: #49454F;
+            box-shadow: 0 0 0 2px rgba(#49454F, 0.1);
         }
 
         &::placeholder {
@@ -130,7 +130,7 @@ const handleDrop = (event) => {
     }
 
     .upload-area {
-        border: 2px dashed #d4756d;
+        border: 2px dashed #ccd0d5;
         border-radius: 1rem;
         padding: 2rem;
         text-align: center;
@@ -142,11 +142,14 @@ const handleDrop = (event) => {
         justify-content: center;
 
         &:hover:not(.uploading) {
-            background-color: rgba(#d4756d, 0.05);
+            background-color: rgba(#49454F, 0.03);
+            border-color: #49454F;
         }
 
         &.uploading {
             cursor: default;
+            border-style: solid;
+            border-color: #49454F;
         }
     }
 
@@ -187,7 +190,7 @@ const handleDrop = (event) => {
 
         .progress-fill {
             height: 100%;
-            background: #d4756d;
+            background: #49454F;
             transition: width 0.3s ease;
         }
 
