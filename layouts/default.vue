@@ -23,9 +23,6 @@
 
 <script setup>
 import moment from 'moment';
-import Menu from '~/components/Menu.vue';
-import { useWedding } from '~/stores/wedding';
-import { onMounted } from 'vue';
 
 const wedding = useWedding();
 </script>

@@ -2,6 +2,4 @@
     <TabB />
 </template>
 
-<script setup>
-import TabB from '../components/TabB.vue';
-</script>
+<script setup></script>
