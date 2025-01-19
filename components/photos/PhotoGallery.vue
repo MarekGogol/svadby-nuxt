@@ -54,7 +54,7 @@ const loadPage = async (page) => {
 
     isLoading.value = true;
     try {
-        const { data } = await useAxios().$get('/api/wedding/photos', {
+        const { data } = await useAxios().$get('/api/event/galleries', {
             params: { page },
         });
 

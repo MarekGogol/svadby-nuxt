@@ -1,21 +1,21 @@
 import { defineStore } from 'pinia';
 
-export const useWedding = defineStore('wedding', {
+export const useEventStore = defineStore('event', {
     state: () => ({
-        wedding: null,
+        event: null,
         loading: true,
     }),
 
     actions: {
-        async fetchWedding() {
+        async fetchEvent() {
             try {
                 const { data } = await useAxios()
                     .loading((state) => (this.loading = state))
-                    .$get('/api/wedding');
+                    .$get('/api/event');
 
-                this.wedding = data.wedding;
+                this.event = data.event;
             } catch (error) {
-                console.error('Failed to fetch wedding data:', error);
+                console.error('Failed to fetch event data:', error);
             }
         },
     },

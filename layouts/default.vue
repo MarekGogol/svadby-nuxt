@@ -1,13 +1,13 @@
 <template>
     <div class="container">
         <div class="side-text">
-            {{ formatSideText(wedding) }}
+            {{ formatSideText() }}
         </div>
         <div class="content-wrapper">
             <header>
                 <div class="date">{{ formattedDate }}</div>
-                <div class="names" v-if="wedding?.name">
-                    {{ formatNames(wedding.name) }}
+                <div class="names" v-if="event?.name">
+                    {{ formatNames(event.name) }}
                 </div>
             </header>
 
@@ -24,13 +24,13 @@
 <script setup>
 import moment from 'moment';
 
-const weddingStore = useWedding();
+const eventStore = useEventStore();
 
-const wedding = computed(() => weddingStore.wedding);
+const event = computed(() => eventStore.event);
 
 const formattedDate = computed(() => {
-    if (!wedding?.date) return '';
-    return moment(wedding.date).format('MMMM D, YYYY').toUpperCase();
+    if (!event.value?.date) return '';
+    return moment(event.value.date).format('MMMM D, YYYY').toUpperCase();
 });
 
 const formatNames = (name) => {
@@ -41,11 +41,11 @@ const formatNames = (name) => {
         .join('\n&\n');
 };
 
-const formatSideText = (wedding) => {
+const formatSideText = () => {
     return (
-        wedding.firstname_man.substr(0, 1) +
+        event.value?.firstname_man.substr(0, 1) +
         ' & ' +
-        wedding.firstname_woman.substr(0, 1)
+        event.value?.firstname_woman.substr(0, 1)
     );
 };
 </script>

@@ -70,17 +70,21 @@ const uploadPhoto = async (file) => {
     uploadProgress.value = 0;
 
     try {
-        const { data } = await useAxios().$post('/api/upload', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onUploadProgress: (progressEvent) => {
-                const percentCompleted = Math.round(
-                    (progressEvent.loaded * 100) / progressEvent.total
-                );
-                uploadProgress.value = percentCompleted;
-            },
-        });
+        const { data } = await useAxios().$post(
+            '/api/event/galleries',
+            formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                onUploadProgress: (progressEvent) => {
+                    const percentCompleted = Math.round(
+                        (progressEvent.loaded * 100) / progressEvent.total
+                    );
+                    uploadProgress.value = percentCompleted;
+                },
+            }
+        );
 
         if (data && data.file) {
             photos.value.unshift(data.file);
