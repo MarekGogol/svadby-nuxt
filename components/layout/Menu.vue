@@ -11,6 +11,10 @@
         <NuxtLink to="/schedule" class="nav-link">
             {{ __('Harmonogram') }}
         </NuxtLink>
+        <span class="divider"></span>
+        <NuxtLink to="/guests" class="nav-link">
+            {{ __('Hostia') }}
+        </NuxtLink>
     </nav>
 </template>
 
