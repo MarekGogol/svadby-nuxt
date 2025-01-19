@@ -2,7 +2,7 @@
     <div v-if="photos.length || galleryPhotos.length" class="gallery-section">
         <div class="section-divider">
             <hr />
-            <span>{{ __('Fotky do fotoknihy') }}</span>
+            <span>{{ __('Nahrané fotografie') }}</span>
             <hr />
         </div>
 
