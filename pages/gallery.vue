@@ -6,10 +6,6 @@
 </template>
 
 <script setup>
-definePageMeta({
-    keepalive: true
-});
-
 const galleryStore = useGalleryStore();
 galleryStore.setType('gallery');
 
