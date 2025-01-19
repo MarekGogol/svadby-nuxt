@@ -7,11 +7,11 @@
 
 <script setup>
 definePageMeta({
-    keepalive: true
+    keepalive: true,
 });
 
 const galleryStore = useGalleryStore();
-galleryStore.setType('gallery');
+galleryStore.setType('photobook');
 
 // Async data fetching
 await galleryStore.fetchPhotos(1);

@@ -4,6 +4,10 @@
             {{ __('Fotogaléria') }}
         </NuxtLink>
         <span class="divider"></span>
+        <NuxtLink to="/photobook" class="nav-link">
+            {{ __('Fotokniha') }}
+        </NuxtLink>
+        <span class="divider"></span>
         <NuxtLink to="/schedule" class="nav-link">
             {{ __('Harmonogram') }}
         </NuxtLink>
