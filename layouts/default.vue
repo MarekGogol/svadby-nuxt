@@ -1,11 +1,13 @@
 <template>
     <div class="container">
-        <div class="side-text">{{ formatSideText(wedding.wedding?.name) }}</div>
+        <div class="side-text">
+            {{ formatSideText(wedding) }}
+        </div>
         <div class="content-wrapper">
             <header>
                 <div class="date">{{ formattedDate }}</div>
-                <div class="names" v-if="wedding.wedding?.name">
-                    {{ formatNames(wedding.wedding.name) }}
+                <div class="names" v-if="wedding?.name">
+                    {{ formatNames(wedding.name) }}
                 </div>
             </header>
 
@@ -21,26 +23,30 @@
 
 <script setup>
 import moment from 'moment';
-const wedding = useWedding();
+
+const weddingStore = useWedding();
+
+const wedding = computed(() => weddingStore.wedding);
 
 const formattedDate = computed(() => {
-    if (!wedding.wedding?.date) return '';
-    return moment(wedding.wedding.date).format('MMMM D, YYYY').toUpperCase();
+    if (!wedding?.date) return '';
+    return moment(wedding.date).format('MMMM D, YYYY').toUpperCase();
 });
 
 const formatNames = (name) => {
     if (!name) return '';
-    return name.split('&').map(part =>
-        part.trim().toUpperCase()
-    ).join('\n&\n');
+    return name
+        .split('&')
+        .map((part) => part.trim().toUpperCase())
+        .join('\n&\n');
 };
 
-const formatSideText = (name) => {
-    if (!name) return 'S & M';
-    return name
-        .split(/\s+/)
-        .map(word => word.charAt(0))
-        .join(' ');
+const formatSideText = (wedding) => {
+    return (
+        wedding.firstname_man.substr(0, 1) +
+        ' & ' +
+        wedding.firstname_woman.substr(0, 1)
+    );
 };
 </script>
 
