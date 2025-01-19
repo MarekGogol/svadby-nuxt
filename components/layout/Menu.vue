@@ -1,8 +1,12 @@
 <template>
     <nav class="navigation">
-        <NuxtLink to="/photos" class="nav-link">PHOTOGRAPHS</NuxtLink>
+        <NuxtLink to="/photos" class="nav-link">
+            {{ __('Fotogaléria') }}
+        </NuxtLink>
         <span class="divider"></span>
-        <NuxtLink to="/schedule" class="nav-link">TIMELINE</NuxtLink>
+        <NuxtLink to="/schedule" class="nav-link">
+            {{ __('Harmonogram') }}
+        </NuxtLink>
     </nav>
 </template>
 
@@ -23,8 +27,10 @@
         text-decoration: none;
         letter-spacing: 0.2rem;
         transition: all 0.3s;
+        text-transform: uppercase;
 
-        &:hover, &.router-link-active {
+        &:hover,
+        &.router-link-active {
             color: #000;
         }
     }
