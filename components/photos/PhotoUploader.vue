@@ -4,32 +4,40 @@
             <input
                 v-model="photoTitle"
                 type="text"
-                placeholder="Add a title for your next photo (optional)"
+                :placeholder="__('Zadajte popis alebo spomienku k fotke')"
                 class="title-input"
-            >
+            />
         </div>
 
-        <div class="upload-area" @click="triggerFileInput" @drop.prevent="handleDrop" @dragover.prevent>
+        <div
+            class="upload-area"
+            @click="triggerFileInput"
+            @drop.prevent="handleDrop"
+            @dragover.prevent
+        >
             <input
                 type="file"
                 ref="fileInput"
                 @change="handleFileSelect"
                 accept="image/*"
                 class="hidden"
-            >
+            />
             <div v-if="!uploading" class="upload-prompt">
                 <span class="icon">📸</span>
-                <p>Click or drag image here to upload</p>
+                <p>{{ __('Klikni alebo pretiahni fotografie') }}</p>
             </div>
             <div v-else class="upload-status">
                 <div class="progress-wrapper">
                     <div class="progress-bar">
-                        <div class="progress-fill" :style="{ width: `${uploadProgress}%` }"></div>
+                        <div
+                            class="progress-fill"
+                            :style="{ width: `${uploadProgress}%` }"
+                        ></div>
                     </div>
                     <div class="progress-text">{{ uploadProgress }}%</div>
                 </div>
                 <div class="selected-file">
-                    Uploading: {{ selectedFile?.name }}
+                    {{ __('Nahrávam') }}: {{ selectedFile?.name }}
                 </div>
             </div>
         </div>
@@ -62,18 +70,17 @@ const uploadPhoto = async (file) => {
     uploadProgress.value = 0;
 
     try {
-        const { data } = await useAxios()
-            .$post('/api/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                onUploadProgress: (progressEvent) => {
-                    const percentCompleted = Math.round(
-                        (progressEvent.loaded * 100) / progressEvent.total
-                    );
-                    uploadProgress.value = percentCompleted;
-                }
-            });
+        const { data } = await useAxios().$post('/api/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            onUploadProgress: (progressEvent) => {
+                const percentCompleted = Math.round(
+                    (progressEvent.loaded * 100) / progressEvent.total
+                );
+                uploadProgress.value = percentCompleted;
+            },
+        });
 
         if (data && data.file) {
             photos.value.unshift(data.file);
@@ -120,8 +127,8 @@ const handleDrop = (event) => {
 
         &:focus {
             outline: none;
-            border-color: #49454F;
-            box-shadow: 0 0 0 2px rgba(#49454F, 0.1);
+            border-color: #49454f;
+            box-shadow: 0 0 0 2px rgba(#49454f, 0.1);
         }
 
         &::placeholder {
@@ -142,14 +149,14 @@ const handleDrop = (event) => {
         justify-content: center;
 
         &:hover:not(.uploading) {
-            background-color: rgba(#49454F, 0.03);
-            border-color: #49454F;
+            background-color: rgba(#49454f, 0.03);
+            border-color: #49454f;
         }
 
         &.uploading {
             cursor: default;
             border-style: solid;
-            border-color: #49454F;
+            border-color: #49454f;
         }
     }
 
@@ -190,7 +197,7 @@ const handleDrop = (event) => {
 
         .progress-fill {
             height: 100%;
-            background: #49454F;
+            background: #49454f;
             transition: width 0.3s ease;
         }
 

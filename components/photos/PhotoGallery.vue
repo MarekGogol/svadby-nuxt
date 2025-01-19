@@ -1,29 +1,26 @@
 <template>
     <div v-if="photos.length || galleryPhotos.length" class="gallery-section">
         <div class="section-divider">
-            <hr>
-            <span>Photo Gallery</span>
-            <hr>
+            <hr />
+            <span>{{ __('Fotky do fotoknihy') }}</span>
+            <hr />
         </div>
 
         <div class="photos-grid">
-            <div v-for="photo in [...photos, ...galleryPhotos]" :key="photo.id" class="photo-item">
+            <div
+                v-for="photo in [...photos, ...galleryPhotos]"
+                :key="photo.id"
+                class="photo-item"
+            >
                 <div class="photo-container">
-                    <img
-                        loading="lazy"
-                        :src="photo.image"
-                        :alt="photo.title"
-                    >
+                    <img loading="lazy" :src="photo.image" :alt="photo.title" />
                     <div class="photo-title">{{ photo.title }}</div>
                 </div>
             </div>
         </div>
 
-        <div
-            v-if="isLoading"
-            class="loading-wrapper"
-        >
-            Loading more photos...
+        <div v-if="isLoading" class="loading-wrapper">
+            {{ __('Načitávam viac fotografii...') }}
         </div>
 
         <div
@@ -38,8 +35,8 @@
 const props = defineProps({
     photos: {
         type: Array,
-        default: () => []
-    }
+        default: () => [],
+    },
 });
 
 const galleryPhotos = ref([]);
@@ -58,14 +55,17 @@ const loadPage = async (page) => {
     isLoading.value = true;
     try {
         const { data } = await useAxios().$get('/api/wedding/photos', {
-            params: { page }
+            params: { page },
         });
 
         if (data?.pagination?.data) {
             if (page === 1) {
                 galleryPhotos.value = data.pagination.data;
             } else {
-                galleryPhotos.value = [...galleryPhotos.value, ...data.pagination.data];
+                galleryPhotos.value = [
+                    ...galleryPhotos.value,
+                    ...data.pagination.data,
+                ];
             }
             pagination.value = data.pagination;
         }
@@ -79,13 +79,20 @@ const loadPage = async (page) => {
 onMounted(async () => {
     await loadPage(1);
 
-    const observer = new IntersectionObserver(async ([entry]) => {
-        if (entry.isIntersecting && hasMorePages.value && !isLoading.value) {
-            await loadPage(pagination.value.current_page + 1);
+    const observer = new IntersectionObserver(
+        async ([entry]) => {
+            if (
+                entry.isIntersecting &&
+                hasMorePages.value &&
+                !isLoading.value
+            ) {
+                await loadPage(pagination.value.current_page + 1);
+            }
+        },
+        {
+            rootMargin: '100px',
         }
-    }, {
-        rootMargin: '100px'
-    });
+    );
 
     if (loadMoreTrigger.value) {
         observer.observe(loadMoreTrigger.value);
