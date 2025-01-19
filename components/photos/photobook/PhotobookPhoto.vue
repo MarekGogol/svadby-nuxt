@@ -55,14 +55,19 @@ defineProps({
     left: 0;
     right: 0;
     background: rgba(255, 255, 255, 0.5);
-    padding: 0.5rem;
+    padding: 0.25rem;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     color: #000;
     font-family: 'Times New Roman', serif;
     font-style: italic;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    @media (min-width: 768px) {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
 }
 </style>

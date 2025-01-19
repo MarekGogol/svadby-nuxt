@@ -20,6 +20,11 @@ defineProps({
     border-radius: 0.5rem;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 0 1rem;
+
+    @media (min-width: 768px) {
+        margin: 0;
+    }
 
     img {
         width: 100%;

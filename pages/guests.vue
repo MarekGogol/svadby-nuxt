@@ -44,18 +44,30 @@ await guestsStore.fetchGuests();
 .guests-page {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
+
+    @media (min-width: 768px) {
+        padding: 0 1rem;
+    }
 }
 
 .loading {
     text-align: center;
-    padding: 3rem;
+    padding: 2rem;
     font-family: 'Times New Roman', serif;
     color: #666;
     font-style: italic;
 }
 
 .tables-list {
-    padding: 2rem 0;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem; // Reduced by 20% from 0.75rem
+
+    @media (min-width: 768px) {
+        padding: 2rem 0;
+        gap: 1.6rem; // Reduced by 20% from 2rem
+    }
 }
 </style>

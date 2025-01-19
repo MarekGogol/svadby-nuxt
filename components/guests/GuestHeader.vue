@@ -44,12 +44,12 @@ const updateAttendance = async (attendance) => {
 <style lang="scss" scoped>
 .guest-header {
     text-align: center;
-    padding: 1.5rem 0;
+    padding: 0 0 1.5rem;
     border-bottom: 1px solid #eee;
     margin-bottom: 2rem;
 
     @media (min-width: 768px) {
-        padding: 2rem 0;
+        padding: 0 0 2rem;
         margin-bottom: 3rem;
     }
 }

@@ -27,20 +27,28 @@ defineProps({
     width: 100%;
     aspect-ratio: 1.4;
     background: white;
-    padding: 3rem;
+    padding: 1rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     position: relative;
     overflow: hidden;
+
+    @media (min-width: 768px) {
+        padding: 3rem;
+    }
 }
 
 .photo-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 0.75rem;
     height: 100%;
     width: 100%;
+
+    @media (min-width: 768px) {
+        gap: 2rem;
+    }
 }
 
 .photo-slot {
@@ -50,11 +58,16 @@ defineProps({
 
 .page-number {
     position: absolute;
-    bottom: 1rem;
-    right: 2rem;
+    bottom: 0.5rem;
+    right: 1rem;
     font-family: 'Times New Roman', serif;
     font-size: 0.875rem;
     color: #999;
     font-style: italic;
+
+    @media (min-width: 768px) {
+        bottom: 1rem;
+        right: 2rem;
+    }
 }
 </style>

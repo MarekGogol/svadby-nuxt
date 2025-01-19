@@ -70,14 +70,22 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .gallery-section {
-    margin-top: 2rem;
+    margin-top: 1rem;
+
+    @media (min-width: 768px) {
+        margin-top: 2rem;
+    }
 }
 
 .section-divider {
     display: flex;
     align-items: center;
-    margin: 2rem 0;
+    margin: 1rem 0;
     color: #666;
+
+    @media (min-width: 768px) {
+        margin: 2rem 0;
+    }
 
     hr {
         flex: 1;
@@ -87,31 +95,51 @@ onUnmounted(() => {
     }
 
     span {
-        padding: 0 1rem;
-        font-size: 0.9rem;
+        padding: 0 0.5rem;
+        font-size: 0.85rem;
         font-weight: 500;
         color: #666;
         font-family: 'Times New Roman', serif;
+
+        @media (min-width: 768px) {
+            padding: 0 1rem;
+            font-size: 0.9rem;
+        }
     }
 }
 
 .photos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.5rem;
+    padding: 0 0.25rem;
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+        padding: 0;
+    }
 }
 
 .loading-wrapper {
     text-align: center;
-    padding: 2rem;
+    padding: 1rem;
     color: #666;
     font-family: 'Times New Roman', serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+
+    @media (min-width: 768px) {
+        padding: 2rem;
+        font-size: 0.9rem;
+    }
 }
 
 .load-more-trigger {
     height: 20px;
-    margin-top: 2rem;
+    margin-top: 1rem;
+
+    @media (min-width: 768px) {
+        margin-top: 2rem;
+    }
 }
 </style>
-

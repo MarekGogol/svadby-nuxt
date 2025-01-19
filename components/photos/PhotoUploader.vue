@@ -152,17 +152,26 @@ const handleDrop = (event) => {
 <style lang="scss" scoped>
 .photo-uploader {
     .title-input-wrapper {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
+
+        @media (min-width: 768px) {
+            margin-bottom: 1rem;
+        }
     }
 
     .title-input {
         width: 100%;
-        padding: 0.75rem 1rem;
+        padding: 0.5rem 0.75rem;
         border: 1px solid #ddd;
         border-radius: 0.5rem;
         font-family: 'Lato', sans-serif;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         transition: all 0.3s;
+
+        @media (min-width: 768px) {
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+        }
 
         &:focus {
             outline: none;
@@ -177,15 +186,21 @@ const handleDrop = (event) => {
 
     .upload-area {
         border: 2px dashed #ccd0d5;
-        border-radius: 1rem;
-        padding: 2rem;
+        border-radius: 0.75rem;
+        padding: 1rem;
         text-align: center;
         cursor: pointer;
         transition: all 0.3s;
-        min-height: 200px;
+        min-height: 150px;
         display: flex;
         align-items: center;
         justify-content: center;
+
+        @media (min-width: 768px) {
+            border-radius: 1rem;
+            padding: 2rem;
+            min-height: 200px;
+        }
 
         &:hover:not(.uploading) {
             background-color: rgba(#49454f, 0.03);
@@ -205,33 +220,58 @@ const handleDrop = (event) => {
 
     .upload-prompt {
         .icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
             display: block;
+
+            @media (min-width: 768px) {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
         }
 
         p {
             color: #666;
             margin: 0;
+            font-size: 0.9rem;
+
+            @media (min-width: 768px) {
+                font-size: 1rem;
+            }
         }
     }
 
     .upload-status {
         width: 100%;
+        padding: 0 0.5rem;
+
+        @media (min-width: 768px) {
+            padding: 0;
+        }
 
         .progress-wrapper {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+
+            @media (min-width: 768px) {
+                gap: 1rem;
+                margin-bottom: 1rem;
+            }
         }
 
         .progress-bar {
             flex: 1;
-            height: 8px;
+            height: 6px;
             background: #eee;
-            border-radius: 4px;
+            border-radius: 3px;
             overflow: hidden;
+
+            @media (min-width: 768px) {
+                height: 8px;
+                border-radius: 4px;
+            }
         }
 
         .progress-fill {
@@ -241,14 +281,23 @@ const handleDrop = (event) => {
         }
 
         .progress-text {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #666;
-            min-width: 3.5rem;
+            min-width: 3rem;
+
+            @media (min-width: 768px) {
+                font-size: 0.9rem;
+                min-width: 3.5rem;
+            }
         }
 
         .selected-file {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #666;
+
+            @media (min-width: 768px) {
+                font-size: 0.9rem;
+            }
         }
     }
 }

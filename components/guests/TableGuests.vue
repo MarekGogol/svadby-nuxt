@@ -62,14 +62,16 @@ const handleGuestClick = (guest) => {
 const calculatePosition = (index, total) => {
     if (total === 0) return {};
     
-    // Calculate the angle for this guest
     const angleStep = (2 * Math.PI) / total;
-    const angle = index * angleStep - Math.PI / 2; // Start from top
+    const angle = index * angleStep - Math.PI / 2;
     
-    // Calculate position on the circle
-    const radius = 220; // Increased radius for bigger circle
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
+    // Increase base radius by 10%
+    const radius = 110; // Changed from 100 to 110
+    const mobileScale = window.innerWidth < 768 ? 0.7 : 1;
+    const finalRadius = radius * mobileScale;
+    
+    const x = Math.cos(angle) * finalRadius;
+    const y = Math.sin(angle) * finalRadius;
     
     return {
         transform: `translate(${x}px, ${y}px)`,
@@ -79,62 +81,111 @@ const calculatePosition = (index, total) => {
 
 <style lang="scss" scoped>
 .table-section {
-    margin-bottom: 6rem;
+    margin-bottom: 1.05rem; // Reduced by 30% from 1.5rem
+    background: transparent;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+
+    @media (min-width: 768px) {
+        margin-bottom: 2.1rem; // Reduced by 30% from 3rem
+        padding: 1rem;
+        border-radius: 1rem;
+    }
 }
 
 .table-title {
     font-family: 'Times New Roman', serif;
-    font-size: 1rem;
+    font-size: 0.75rem;
     color: #999;
-    letter-spacing: 0.2rem;
-    margin-bottom: 2rem;
+    letter-spacing: 0.1rem;
+    margin-bottom: 0.75rem;
     font-weight: normal;
     text-align: center;
+
+    @media (min-width: 768px) {
+        font-size: 1rem;
+        letter-spacing: 0.2rem;
+        margin-bottom: 2rem;
+    }
 }
 
 .table-container {
     position: relative;
-    height: 600px; // Increased height
+    height: 280px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2rem 0;
+    margin: 0.5rem 0;
+
+    @media (min-width: 768px) {
+        height: 400px;
+        margin: 2rem 0;
+    }
 }
 
 .round-table {
     position: relative;
-    width: 220px; // Increased size
-    height: 220px; // Increased size
+    width: 100px;
+    height: 100px;
+
+    @media (min-width: 768px) {
+        width: 180px;
+        height: 180px;
+    }
 }
 
 .table-top {
     position: absolute;
-    width: 220px; // Increased size
-    height: 220px; // Increased size
-    background: #f5f5f5;
-    border: 3px solid #ddd; // Slightly thicker border
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at center, 
+            rgba(255,255,255,0.5) 0%, 
+            rgba(255,255,255,0.2) 100%),
+        repeating-radial-gradient(
+            circle at center,
+            #F0E5D4, /* Lighter base color */
+            #F0E5D4 2px,
+            #E5DAC9 2px, /* Lighter secondary color */
+            #E5DAC9 4px
+        );
+    border: 4px solid #D4C9B8; /* Lighter border color */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 
+        inset 0 2px 5px rgba(255,255,255,0.4),
+        inset 0 -2px 5px rgba(0,0,0,0.05),
+        0 5px 15px rgba(0,0,0,0.05);
     
     &::after {
         content: '';
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 200px; // Adjusted inner circle
-        height: 200px; // Adjusted inner circle
-        border: 1px solid #e0e0e0;
+        width: calc(100% - 16px);
+        height: calc(100% - 16px);
+        border: 2px solid rgba(212, 201, 184, 0.2); /* Lighter inner border */
         border-radius: 50%;
         transform: translate(-50%, -50%);
+
+        @media (min-width: 768px) {
+            width: calc(100% - 20px);
+            height: calc(100% - 20px);
+        }
     }
 }
 
 .table-number {
     font-family: 'Times New Roman', serif;
-    font-size: 3rem; // Bigger number
-    color: #999;
+    font-size: 1.5rem;
+    color: #9E8E73; /* Lighter text color */
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+
+    @media (min-width: 768px) {
+        font-size: 2.5rem;
+    }
 }
 
 .guest-seat {
@@ -148,17 +199,28 @@ const calculatePosition = (index, total) => {
     position: absolute;
     transform: translate(-50%, -50%);
     font-family: 'Times New Roman', serif;
-    padding: 1rem 2rem; // Increased padding
+    padding: 0.35rem 0.75rem;
     background: white;
     border: 1px solid #eee;
-    border-radius: 25px; // Slightly larger radius
+    border-radius: 15px;
     color: #666;
     text-align: center;
     user-select: none;
     white-space: nowrap;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    font-size: 1.1rem; // Slightly larger font
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    font-size: 0.75rem;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (min-width: 768px) {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 25px;
+        max-width: 200px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
 
     &.is-clickable {
         cursor: pointer;
@@ -166,7 +228,11 @@ const calculatePosition = (index, total) => {
         &:hover {
             border-color: #000;
             color: #000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+            @media (min-width: 768px) {
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
         }
     }
 
@@ -178,7 +244,11 @@ const calculatePosition = (index, total) => {
         border-color: #000;
         color: #000;
         font-weight: bold;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+        @media (min-width: 768px) {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
     }
 
     &.is-attending {
@@ -189,26 +259,6 @@ const calculatePosition = (index, total) => {
     &.not-attending {
         background-color: rgba(255, 0, 0, 0.1);
         border-color: rgba(255, 0, 0, 0.2);
-    }
-}
-
-// Responsive adjustments
-@media (max-width: 768px) {
-    .table-container {
-        height: 500px;
-        transform: scale(0.8);
-        transform-origin: center center;
-    }
-
-    .guest-item {
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .table-container {
-        transform: scale(0.6);
     }
 }
 </style>

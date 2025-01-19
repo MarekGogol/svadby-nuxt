@@ -97,35 +97,55 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .photobook-gallery {
-    padding: 2rem 0;
+    padding: 1rem 0;
     width: 100%;
+
+    @media (min-width: 768px) {
+        padding: 2rem 0;
+    }
 }
 
 .photobook {
     width: 100%;
     background: #f8f8f8;
-    padding: 2rem;
+    padding: 0.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+    @media (min-width: 768px) {
+        padding: 2rem;
+    }
 }
 
 .book-pages {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 1.5rem;
     width: 100%;
+
+    @media (min-width: 768px) {
+        gap: 3rem;
+    }
 }
 
 .loading-wrapper {
     text-align: center;
-    padding: 2rem;
+    padding: 1rem;
     color: #666;
     font-family: 'Times New Roman', serif;
     font-size: 0.9rem;
+
+    @media (min-width: 768px) {
+        padding: 2rem;
+    }
 }
 
 .load-more-trigger {
     height: 20px;
-    margin-top: 2rem;
+    margin-top: 1rem;
+
+    @media (min-width: 768px) {
+        margin-top: 2rem;
+    }
 }
 </style>
