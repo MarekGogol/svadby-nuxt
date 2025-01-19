@@ -1,6 +1,6 @@
 <template>
     <div class="gallery-page">
-        <PhotoUploader />
+        <PhotoUploader :show-title="false" />
         <PhotoGallery />
     </div>
 </template>

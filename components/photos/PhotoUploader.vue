@@ -1,6 +1,6 @@
 <template>
     <div class="photo-uploader">
-        <div class="title-input-wrapper">
+        <div v-if="showTitle" class="title-input-wrapper">
             <input
                 v-model="photoTitle"
                 type="text"
@@ -47,10 +47,10 @@
 
 <script setup>
 const props = defineProps({
-    type: {
-        type: String,
-        default: 'gallery'
-    }
+    showTitle: {
+        type: Boolean,
+        default: true,
+    },
 });
 
 const galleryStore = useGalleryStore();
@@ -69,9 +69,9 @@ const uploadPhoto = async (file) => {
 
     selectedFile.value = file;
     const formData = new FormData();
-    formData.append('title', photoTitle.value || file.name);
+    formData.append('title', photoTitle.value);
     formData.append('image', file);
-    formData.append('type', props.type);
+    formData.append('type', galleryStore.type);
 
     uploading.value = true;
     uploadProgress.value = 0;
