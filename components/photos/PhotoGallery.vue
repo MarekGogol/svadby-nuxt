@@ -8,10 +8,7 @@
 
         <div class="photos-grid">
             <div v-for="photo in photos" :key="photo.id" class="photo-item">
-                <div class="photo-container">
-                    <img loading="lazy" :src="photo.image" :alt="photo.title" />
-                    <div class="photo-title">{{ photo.title }}</div>
-                </div>
+                <PhotoGalleryCard :photo="photo" />
             </div>
         </div>
 
@@ -94,7 +91,7 @@ onUnmounted(() => {
         font-size: 0.9rem;
         font-weight: 500;
         color: #666;
-        font-family: 'Lato', sans-serif;
+        font-family: 'Times New Roman', serif;
     }
 }
 
@@ -102,43 +99,6 @@ onUnmounted(() => {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1rem;
-}
-
-.photo-item {
-    .photo-container {
-        position: relative;
-        border-radius: 0.5rem;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-        img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .photo-title {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 0.5rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-            font-size: 0.9rem;
-            color: #2c3e50;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        &:hover .photo-title {
-            transform: translateY(0);
-        }
-    }
 }
 
 .loading-wrapper {
