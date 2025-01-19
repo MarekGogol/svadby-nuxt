@@ -9,8 +9,7 @@ export default defineNuxtConfig({
             {
                 path: '~/components',
                 pathPrefix: false,
-                prefix: '',
-                global: true
+                prefix: ''
             },
         ],
     },
