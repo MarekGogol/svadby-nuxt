@@ -2,6 +2,6 @@
 // Redirect to photos page
 const router = useRouter();
 onMounted(() => {
-    router.push('/photos');
+    router.push({ name: 'gallery' });
 });
 </script>

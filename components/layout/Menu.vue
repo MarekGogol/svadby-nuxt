@@ -1,6 +1,6 @@
 <template>
     <nav class="navigation">
-        <NuxtLink to="/photos" class="nav-link">
+        <NuxtLink to="/gallery" class="nav-link">
             {{ __('Fotogaléria') }}
         </NuxtLink>
         <span class="divider"></span>
