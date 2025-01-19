@@ -79,25 +79,39 @@ const formatSideText = () => {
     flex: 1;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
+    
+    @media (min-width: 768px) {
+        padding: 2rem;
+    }
 }
 
 header {
     text-align: center;
-    margin-bottom: 4rem;
-    padding: 4rem 1rem;
+    margin-bottom: 2rem;
+    padding: 2rem 1rem;
+
+    @media (min-width: 768px) {
+        margin-bottom: 4rem;
+        padding: 4rem 1rem;
+    }
 
     .date {
         font-family: 'Times New Roman', serif;
-        font-size: 0.875rem;
+        font-size: 0.75rem;
         color: #999;
         letter-spacing: 0.25rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
+
+        @media (min-width: 768px) {
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
     }
 
     .names {
         font-family: 'Times New Roman', serif;
-        font-size: 3.5rem;
+        font-size: 2.5rem;
         line-height: 1.2;
         color: #000;
         font-weight: normal;
@@ -116,7 +130,7 @@ header {
 }
 
 .page-content {
-    padding: 2rem;
+    padding: 1rem;
 
     @media (min-width: 768px) {
         padding: 3rem;

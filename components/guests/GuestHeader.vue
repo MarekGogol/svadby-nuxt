@@ -44,52 +44,84 @@ const updateAttendance = async (attendance) => {
 <style lang="scss" scoped>
 .guest-header {
     text-align: center;
-    padding: 2rem 0;
+    padding: 1.5rem 0;
     border-bottom: 1px solid #eee;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+
+    @media (min-width: 768px) {
+        padding: 2rem 0;
+        margin-bottom: 3rem;
+    }
 }
 
 .current-guest, .guest-info {
     h2 {
         font-family: 'Times New Roman', serif;
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: normal;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         color: #000;
+
+        @media (min-width: 768px) {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
     }
 }
 
 .guest-info {
     .attendance-status {
         font-family: 'Times New Roman', serif;
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: #666;
         font-style: italic;
+
+        @media (min-width: 768px) {
+            font-size: 1.1rem;
+        }
     }
 }
 
 .guest-prompt {
     font-family: 'Times New Roman', serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #666;
     font-style: italic;
+    padding: 0 1rem;
+
+    @media (min-width: 768px) {
+        font-size: 1.2rem;
+    }
 }
 
 .attendance-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
     justify-content: center;
+    padding: 0 1rem;
+
+    @media (min-width: 768px) {
+        gap: 1rem;
+    }
 
     .btn-attendance {
         font-family: 'Times New Roman', serif;
-        padding: 0.5rem 2rem;
+        padding: 0.5rem 1rem;
         border: 1px solid #ddd;
         background: transparent;
         color: #666;
         cursor: pointer;
         transition: all 0.3s;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         letter-spacing: 0.1rem;
+        flex: 1;
+        max-width: 150px;
+
+        @media (min-width: 768px) {
+            padding: 0.5rem 2rem;
+            font-size: 0.9rem;
+            flex: 0 1 auto;
+        }
 
         &:hover {
             border-color: #000;
