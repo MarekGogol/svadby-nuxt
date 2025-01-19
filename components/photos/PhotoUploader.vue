@@ -11,6 +11,7 @@
 
         <div
             class="upload-area"
+            :class="{ uploading }"
             @click="triggerFileInput"
             @drop.prevent="handleDrop"
             @dragover.prevent
@@ -41,14 +42,19 @@
                 </div>
             </div>
         </div>
-
-        <PhotoGallery :photos="photos" />
     </div>
 </template>
 
 <script setup>
+const props = defineProps({
+    type: {
+        type: String,
+        default: 'gallery'
+    }
+});
+
+const galleryStore = useGalleryStore();
 const fileInput = ref(null);
-const photos = ref([]);
 const selectedFile = ref(null);
 const photoTitle = ref('');
 const uploading = ref(false);
@@ -65,6 +71,7 @@ const uploadPhoto = async (file) => {
     const formData = new FormData();
     formData.append('title', photoTitle.value || file.name);
     formData.append('image', file);
+    formData.append('type', props.type);
 
     uploading.value = true;
     uploadProgress.value = 0;
@@ -87,7 +94,7 @@ const uploadPhoto = async (file) => {
         );
 
         if (data && data.file) {
-            photos.value.unshift(data.file);
+            galleryStore.addPhoto(data.file);
         }
         photoTitle.value = '';
     } catch (error) {

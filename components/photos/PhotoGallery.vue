@@ -1,5 +1,5 @@
 <template>
-    <div v-if="photos.length || galleryPhotos.length" class="gallery-section">
+    <div v-if="photos.length" class="gallery-section">
         <div class="section-divider">
             <hr />
             <span>{{ __('Nahrané fotografie') }}</span>
@@ -7,11 +7,7 @@
         </div>
 
         <div class="photos-grid">
-            <div
-                v-for="photo in [...photos, ...galleryPhotos]"
-                :key="photo.id"
-                class="photo-item"
-            >
+            <div v-for="photo in photos" :key="photo.id" class="photo-item">
                 <div class="photo-container">
                     <img loading="lazy" :src="photo.image" :alt="photo.title" />
                     <div class="photo-title">{{ photo.title }}</div>
@@ -19,12 +15,12 @@
             </div>
         </div>
 
-        <div v-if="isLoading" class="loading-wrapper">
+        <div v-if="galleryStore.loading" class="loading-wrapper">
             {{ __('Načitávam viac fotografii...') }}
         </div>
 
         <div
-            v-if="hasMorePages"
+            v-if="galleryStore.hasMorePages()"
             ref="loadMoreTrigger"
             class="load-more-trigger"
         ></div>
@@ -32,70 +28,45 @@
 </template>
 
 <script setup>
-const props = defineProps({
-    photos: {
-        type: Array,
-        default: () => [],
-    },
-});
-
-const galleryPhotos = ref([]);
-const pagination = ref(null);
-const isLoading = ref(false);
+const galleryStore = useGalleryStore();
+const photos = computed(() => galleryStore.photos);
 const loadMoreTrigger = ref(null);
+let observer = null;
 
-const hasMorePages = computed(() => {
-    if (!pagination.value) return false;
-    return pagination.value.current_page < pagination.value.last_page;
-});
-
-const loadPage = async (page) => {
-    if (isLoading.value) return;
-
-    isLoading.value = true;
-    try {
-        const { data } = await useAxios().$get('/api/event/galleries', {
-            params: { page },
-        });
-
-        if (data?.pagination?.data) {
-            if (page === 1) {
-                galleryPhotos.value = data.pagination.data;
-            } else {
-                galleryPhotos.value = [
-                    ...galleryPhotos.value,
-                    ...data.pagination.data,
-                ];
-            }
-            pagination.value = data.pagination;
-        }
-    } catch (error) {
-        console.error('Failed to fetch photos:', error);
-    } finally {
-        isLoading.value = false;
+// Create observer function
+const setupObserver = () => {
+    if (observer) {
+        observer.disconnect();
     }
-};
 
-onMounted(async () => {
-    await loadPage(1);
-
-    const observer = new IntersectionObserver(
-        async ([entry]) => {
-            if (
-                entry.isIntersecting &&
-                hasMorePages.value &&
-                !isLoading.value
-            ) {
-                await loadPage(pagination.value.current_page + 1);
-            }
-        },
-        {
-            rootMargin: '100px',
+    observer = new IntersectionObserver(async ([entry]) => {
+        if (entry.isIntersecting) {
+            await galleryStore.loadMore();
         }
-    );
+    }, {
+        rootMargin: '100px'
+    });
 
     if (loadMoreTrigger.value) {
         observer.observe(loadMoreTrigger.value);
+    }
+};
+
+// Watch for photos changes
+watch(photos, () => {
+    nextTick(() => {
+        setupObserver();
+    });
+});
+
+onMounted(() => {
+    setupObserver();
+});
+
+onUnmounted(() => {
+    if (observer) {
+        observer.disconnect();
+        observer = null;
     }
 });
 </script>
@@ -183,3 +154,4 @@ onMounted(async () => {
     margin-top: 2rem;
 }
 </style>
+
