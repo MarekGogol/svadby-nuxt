@@ -2,8 +2,10 @@
     <div class="timeline">
         <div v-for="(group, date, index) in groupedEvents" :key="date" class="timeline-group">
             <h2 class="timeline-title">
-                <div class="day-number">{{ index + 1 }}. deň</div>
-                <div class="date">{{ formatDate(date) }}</div>
+                <div class="title-wrapper">
+                    <div class="day-number">{{ index + 1 }}. deň</div>
+                    <div class="date">{{ formatDate(date) }}</div>
+                </div>
             </h2>
             <div class="events">
                 <div v-for="event in group" :key="event.id" class="event">
@@ -51,15 +53,79 @@ const formatTime = (dateTimeStr) => {
 .timeline {
     .timeline-group {
         margin-bottom: 4rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     .timeline-title {
-        font-family: 'Times New Roman', serif;
-        font-size: 1.5rem;
-        color: #333;
-        letter-spacing: 0.2rem;
         text-align: center;
         margin-bottom: 3rem;
+        position: relative;
+        padding: 2rem 0;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: #ddd;
+        }
+
+        &::before {
+            top: 0;
+        }
+
+        &::after {
+            bottom: 0;
+        }
+
+        .title-wrapper {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            padding: 0 2rem;
+
+            &::before,
+            &::after {
+                content: '•';
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #ddd;
+                font-size: 1.2rem;
+            }
+
+            &::before {
+                left: 0;
+            }
+
+            &::after {
+                right: 0;
+            }
+        }
+
+        .day-number {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.75rem;
+            color: #333;
+            font-weight: normal;
+            letter-spacing: 0.1rem;
+        }
+
+        .date {
+            font-family: 'Times New Roman', serif;
+            font-size: 1rem;
+            color: #999;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+        }
     }
 
     .events {
