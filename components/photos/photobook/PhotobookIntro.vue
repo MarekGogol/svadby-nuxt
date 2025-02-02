@@ -20,6 +20,7 @@
 <script setup>
 const isHidden = ref(false);
 
+localStorage.setItem('photobookIntroHidden', false)
 // Check localStorage on component mount
 onMounted(() => {
     isHidden.value = localStorage.getItem('photobookIntroHidden') === 'true';
@@ -31,11 +32,21 @@ const handleClick = () => {
     isHidden.value = true;
     
     // Scroll to upload section
-    const uploadSection = document.querySelector('.upload-section');
-    if (uploadSection) {
-        uploadSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToUploadSection();
 };
+
+const scrollToUploadSection = () => {
+        nextTick(() => {
+            const uploadSection = document.querySelector('.upload-section');
+            if (uploadSection) {
+                const offset = uploadSection.offsetTop - 100;
+                window.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    };
 </script>
 
 <style lang="scss" scoped>
