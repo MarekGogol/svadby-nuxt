@@ -1,12 +1,14 @@
 <template>
     <div class="timeline">
-        <div class="timeline-title">THE DAY OF</div>
-        <div class="events">
-            <div v-for="(event, index) in events" :key="index" class="event">
-                <div class="time">{{ event.time }}</div>
-                <div class="details">
-                    <h3>{{ event.title }}</h3>
-                    <p>{{ event.description }}</p>
+        <div v-for="(group, date) in groupedEvents" :key="date" class="timeline-group">
+            <h2 class="timeline-title">{{ formatDate(date) }}</h2>
+            <div class="events">
+                <div v-for="event in group" :key="event.id" class="event">
+                    <div class="time">{{ formatTime(event.datetime) }}</div>
+                    <div class="details">
+                        <h3>{{ event.name }}</h3>
+                        <p>{{ event.description }}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -14,35 +16,44 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
+import moment from 'moment';
+import { groupBy } from 'lodash';
+
 definePageMeta({
     keepalive: true
 });
 
-const events = [
-    {
-        time: '3:00 PM',
-        title: 'Wedding Ceremony',
-        description: 'Join us as we exchange vows in the garden',
-    },
-    {
-        time: '5:00 PM',
-        title: 'Cocktail Hour',
-        description: "Enjoy refreshments and hors d'oeuvres",
-    },
-    {
-        time: '6:00 PM',
-        title: 'Reception Dinner',
-        description: 'Celebration continues with dinner and dancing',
-    },
-];
+const eventStore = useEventStore();
+const event = eventStore.event;
+
+// Group events by date using lodash groupBy
+const groupedEvents = computed(() => {
+    const events = event.timelines;
+    return groupBy(events, (event) => moment(event.datetime).format('YYYY-MM-DD'));
+});
+
+// Format date to DD.MM.YY using moment.js
+const formatDate = (dateStr) => {
+    return moment(dateStr).format('DD.MM.YY');
+};
+
+// Format time to HH:mm using moment.js
+const formatTime = (dateTimeStr) => {
+    return moment(dateTimeStr).format('HH:mm');
+};
 </script>
 
 <style lang="scss" scoped>
 .timeline {
+    .timeline-group {
+        margin-bottom: 4rem;
+    }
+
     .timeline-title {
         font-family: 'Times New Roman', serif;
-        font-size: 0.875rem;
-        color: #999;
+        font-size: 1.5rem;
+        color: #333;
         letter-spacing: 0.2rem;
         text-align: center;
         margin-bottom: 3rem;
