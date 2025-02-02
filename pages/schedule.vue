@@ -1,7 +1,10 @@
 <template>
     <div class="timeline">
-        <div v-for="(group, date) in groupedEvents" :key="date" class="timeline-group">
-            <h2 class="timeline-title">{{ formatDate(date) }}</h2>
+        <div v-for="(group, date, index) in groupedEvents" :key="date" class="timeline-group">
+            <h2 class="timeline-title">
+                <div class="day-number">{{ index + 1 }}. deň</div>
+                <div class="date">{{ formatDate(date) }}</div>
+            </h2>
             <div class="events">
                 <div v-for="event in group" :key="event.id" class="event">
                     <div class="time">{{ formatTime(event.datetime) }}</div>
