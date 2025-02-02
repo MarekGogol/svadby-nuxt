@@ -1,6 +1,10 @@
 <template>
     <div class="timeline">
-        <div v-for="(group, date, index) in groupedEvents" :key="date" class="timeline-group">
+        <div
+            v-for="(group, date, index) in groupedEvents"
+            :key="date"
+            class="timeline-group"
+        >
             <h2 class="timeline-title">
                 <div class="title-wrapper">
                     <div class="day-number">{{ index + 1 }}. deň</div>
@@ -26,7 +30,7 @@ import moment from 'moment';
 import { groupBy } from 'lodash';
 
 definePageMeta({
-    keepalive: true
+    keepalive: true,
 });
 
 const eventStore = useEventStore();
@@ -35,7 +39,9 @@ const event = eventStore.event;
 // Group events by date using lodash groupBy
 const groupedEvents = computed(() => {
     const events = event.timelines;
-    return groupBy(events, (event) => moment(event.datetime).format('YYYY-MM-DD'));
+    return groupBy(events, (event) =>
+        moment(event.datetime).format('YYYY-MM-DD')
+    );
 });
 
 // Format date to DD.MM.YY using moment.js
