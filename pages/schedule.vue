@@ -1,6 +1,5 @@
 <template>
     <div class="timeline">
-        //test 1
         <div
             v-for="(group, date, index) in groupedEvents"
             :key="date"

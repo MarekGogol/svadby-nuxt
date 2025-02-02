@@ -1,5 +1,5 @@
 <template>
-    <div class="photobook-intro">
+    <div v-if="!isHidden" class="photobook-intro">
         <div class="decorative-border">
             <div class="intro-content">
                 <div class="ornament top">❦</div>
@@ -7,7 +7,7 @@
                 <p class="description">
                     {{ __('Vytvorte s nami nezabudnuteľnú svadobnú fotoknihu. Každá fotografia, ktorú nahráte, sa stane súčasťou našich spoločných spomienok.') }}
                 </p>
-                <button class="cta-button" @click="scrollToUpload">
+                <button class="cta-button" @click="handleClick">
                     <span class="button-text">{{ __('Pridať fotografie') }}</span>
                     <span class="button-ornament">❧</span>
                 </button>
@@ -18,7 +18,19 @@
 </template>
 
 <script setup>
-const scrollToUpload = () => {
+const isHidden = ref(false);
+
+// Check localStorage on component mount
+onMounted(() => {
+    isHidden.value = localStorage.getItem('photobookIntroHidden') === 'true';
+});
+
+const handleClick = () => {
+    // Save to localStorage and hide the component
+    localStorage.setItem('photobookIntroHidden', 'true');
+    isHidden.value = true;
+    
+    // Scroll to upload section
     const uploadSection = document.querySelector('.upload-section');
     if (uploadSection) {
         uploadSection.scrollIntoView({ behavior: 'smooth' });
