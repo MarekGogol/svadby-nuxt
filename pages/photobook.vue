@@ -1,7 +1,7 @@
 <template>
     <div class="photobook-page">
         <!-- Hero Section with Background Image -->
-        <PageHero background-image="/images/A7408267.jpg" />
+        <PageHero background-image="/images/A7408066.jpg" />
 
         <div class="main-content">
             <PhotobookIntro />
