@@ -63,10 +63,10 @@
         width: 1px;
         height: 1rem;
         background-color: rgba(168, 144, 132, 0.3);
-        display: none;
+        display: block;
 
         @media (min-width: 768px) {
-            display: block;
+            height: 1.2rem;
         }
     }
 }
