@@ -1,6 +1,6 @@
-export const useLocaleStore = defineStore('locale', {
-    persist: true,
+import { defineStore } from 'pinia';
 
+export const useLocaleStore = defineStore('locale', {
     state() {
         return {
             locale: 'sk',
@@ -8,6 +8,8 @@ export const useLocaleStore = defineStore('locale', {
             translations: null,
         };
     },
+
+    persist: true,
 
     actions: {},
     getters: {},

@@ -6,9 +6,7 @@ export const useAttendanceStore = defineStore('attendance', {
         isSubmitted: false
     }),
 
-    persist: {
-        storage: typeof window !== 'undefined' ? localStorage : null,
-    },
+    persist: true,
 
     actions: {
         addAttendee() {
