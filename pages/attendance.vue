@@ -161,19 +161,6 @@ const resetForm = () => {
     padding: 1rem 0;
 }
 
-.page-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: #5a4a3a;
-    margin-bottom: 1rem;
-    font-weight: normal;
-
-    @media (min-width: 768px) {
-        font-size: 2.5rem;
-        margin-bottom: 1.5rem;
-    }
-}
-
 .page-description {
     font-family: 'Playfair Display', serif;
     font-size: 1rem;
@@ -189,16 +176,7 @@ const resetForm = () => {
 }
 
 .attendance-form {
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 20px rgba(90, 74, 58, 0.1);
     margin-bottom: 2rem;
-
-    @media (min-width: 768px) {
-        padding: 3rem;
-        border-radius: 16px;
-    }
 }
 
 .form-section {
