@@ -113,7 +113,7 @@ header {
     }
 
     .logo {
-        max-width: 70px;
+        max-width: 50px;
         height: auto;
         opacity: 0.9;
         transition: all 0.3s ease;
