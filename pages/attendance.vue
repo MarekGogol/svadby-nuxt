@@ -1,108 +1,142 @@
 <template>
     <div class="attendance-page">
-        <div class="page-header">
-            <p class="page-description">
-                {{ __('Prosíme o potvrdenie Vašej účasti.') }}
-            </p>
+        <!-- Hero Section with Background Image -->
+        <div class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="hero-ornament">❦</div>
+                <h1 class="hero-title">{{ __('Potvrdenie účasti') }}</h1>
+                <p class="hero-subtitle">
+                    {{ __('Vaša prítomnosť je pre nás najkrajším darom') }}
+                </p>
+                <div class="hero-ornament bottom">❦</div>
+            </div>
         </div>
 
-        <div v-if="!attendanceStore.isSubmitted" class="attendance-form">
-            <div class="form-section">
-                <h2 class="section-title">{{ __('Pridať účastníkov') }}</h2>
-                
-                <div class="attendees-list">
+        <div class="main-content">
+            <div v-if="!attendanceStore.isSubmitted" class="attendance-form">
+                <!-- Elegant Form Header -->
+                <div class="form-header">
+                    <div class="decorative-line"></div>
+                    <h2 class="form-title">{{ __('Kto sa zúčastní?') }}</h2>
+                    <div class="decorative-line"></div>
+                </div>
+
+                <!-- Attendees Cards -->
+                <div class="attendees-container">
                     <div 
                         v-for="(attendee, index) in attendanceStore.attendees" 
                         :key="attendee.id"
-                        class="attendee-row"
+                        class="attendee-card"
                     >
-                        <div class="row-number">{{ index + 1 }}.</div>
-                        <div class="attendee-fields">
-                            <div class="field-group">
-                                <input
-                                    v-model="attendee.name"
-                                    type="text"
-                                    :placeholder="__('Meno a priezvisko')"
-                                    class="name-input"
-                                    @input="updateAttendee(attendee.id, 'name', $event.target.value)"
-                                />
-                                <input
-                                    v-model="attendee.allergies"
-                                    type="text"
-                                    :placeholder="__('Alergie (voliteľné)')"
-                                    class="allergies-input"
-                                    @input="updateAttendee(attendee.id, 'allergies', $event.target.value)"
-                                />
-                            </div>
+                        <div class="card-header">
+                            <div class="guest-number">{{ index + 1 }}. {{ __('hosť') }}</div>
                             <button 
                                 v-if="attendanceStore.attendees.length > 1"
                                 @click="removeAttendee(attendee.id)"
-                                class="remove-btn"
+                                class="remove-button"
                                 type="button"
                             >
-                                ×
+                                <span>×</span>
                             </button>
                         </div>
-                    </div>
-                </div>
-
-                <div class="form-actions">
-                    <button @click="addAttendee" class="add-btn" type="button">
-                        <span class="btn-icon">+</span>
-                        {{ __('Pridať ďalšiu osobu') }}
-                    </button>
-                </div>
-            </div>
-
-            <div class="submit-section">
-                <button 
-                    @click="submitAttendance"
-                    :disabled="!attendanceStore.hasValidAttendees"
-                    class="submit-btn"
-                >
-                    {{ __('Potvrdiť účasť') }}
-                </button>
-            </div>
-        </div>
-
-        <div v-else class="submitted-attendance">
-            <div class="success-message">
-                <div class="success-icon">✓</div>
-                <h2>{{ __('Ďakujeme za potvrdenie účasti!') }}</h2>
-                <p>{{ __('Vaša účasť bola úspešne zaznamenaná. Môžete ju kedykoľvek zmeniť do týždňa pred svadbou.') }}</p>
-            </div>
-
-            <div class="attendees-summary">
-                <h3 class="summary-title">{{ __('Vaši účastníci') }}</h3>
-                <div class="attendees-list-submitted">
-                    <div 
-                        v-for="(attendee, index) in attendanceStore.attendees" 
-                        :key="attendee.id"
-                        class="submitted-attendee"
-                    >
-                        <div class="attendee-info">
-                            <div class="attendee-name">{{ attendee.name }}</div>
-                            <div v-if="attendee.allergies" class="attendee-allergies">
-                                {{ __('Alergie') }}: {{ attendee.allergies }}
+                        
+                        <div class="card-content">
+                            <div class="input-group">
+                                <label class="input-label">{{ __('Meno a priezvisko') }}</label>
+                                <input
+                                    v-model="attendee.name"
+                                    type="text"
+                                    :placeholder="__('Zadajte celé meno')"
+                                    class="elegant-input"
+                                    @input="updateAttendee(attendee.id, 'name', $event.target.value)"
+                                />
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">{{ __('Špeciálne požiadavky') }}</label>
+                                <input
+                                    v-model="attendee.allergies"
+                                    type="text"
+                                    :placeholder="__('Alergie, diéta... (voliteľné)')"
+                                    class="elegant-input secondary"
+                                    @input="updateAttendee(attendee.id, 'allergies', $event.target.value)"
+                                />
                             </div>
                         </div>
-                        <div class="attendance-toggle">
-                            <button
-                                @click="toggleAttendance(attendee.id)"
-                                class="attendance-btn"
-                                :class="{ 'attending': attendee.attendance, 'not-attending': !attendee.attendance }"
-                            >
-                                {{ attendee.attendance ? __('Prídem') : __('Neprídem') }}
-                            </button>
-                        </div>
                     </div>
+                </div>
+
+                <!-- Add Guest Button -->
+                <div class="add-guest-section">
+                    <button @click="addAttendee" class="add-guest-btn" type="button">
+                        <span class="btn-icon">+</span>
+                        <span class="btn-text">{{ __('Pridať ďalšieho hosťa') }}</span>
+                    </button>
+                </div>
+
+                <!-- Submit Section -->
+                <div class="submit-section">
+                    <div class="submit-ornament">✦</div>
+                    <button 
+                        @click="submitAttendance"
+                        :disabled="!attendanceStore.hasValidAttendees"
+                        class="submit-button"
+                    >
+                        <span class="submit-text">{{ __('Potvrdiť účasť') }}</span>
+                        <span class="submit-icon">→</span>
+                    </button>
+                    <div class="submit-ornament">✦</div>
                 </div>
             </div>
 
-            <div class="form-actions-submitted">
-                <button @click="resetForm" class="reset-btn">
-                    {{ __('Upraviť účasť') }}
-                </button>
+            <!-- Success State -->
+            <div v-else class="success-state">
+                <div class="success-card">
+                    <div class="success-icon-wrapper">
+                        <div class="success-icon">✓</div>
+                    </div>
+                    
+                    <h2 class="success-title">{{ __('Ďakujeme za potvrdenie!') }}</h2>
+                    <p class="success-message">
+                        {{ __('Vaša účasť bola úspešne zaznamenaná. Tešíme sa na Vás!') }}
+                    </p>
+
+                    <!-- Attendees Summary -->
+                    <div class="attendees-summary">
+                        <h3 class="summary-title">{{ __('Potvrdení hostia') }}</h3>
+                        <div class="summary-list">
+                            <div 
+                                v-for="(attendee, index) in attendanceStore.attendees" 
+                                :key="attendee.id"
+                                class="summary-item"
+                            >
+                                <div class="attendee-details">
+                                    <div class="attendee-name">{{ attendee.name }}</div>
+                                    <div v-if="attendee.allergies" class="attendee-notes">
+                                        {{ attendee.allergies }}
+                                    </div>
+                                </div>
+                                <div class="attendance-status">
+                                    <button
+                                        @click="toggleAttendance(attendee.id)"
+                                        class="status-toggle"
+                                        :class="{ 'attending': attendee.attendance, 'not-attending': !attendee.attendance }"
+                                    >
+                                        {{ attendee.attendance ? __('Prídem') : __('Neprídem') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Edit Button -->
+                    <div class="edit-section">
+                        <button @click="resetForm" class="edit-button">
+                            {{ __('Upraviť údaje') }}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -146,49 +180,531 @@ const resetForm = () => {
 
 <style lang="scss" scoped>
 .attendance-page {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f6f1f0 0%, #ede3e0 100%);
+}
 
-    @media (min-width: 768px) {
-        padding: 0 2rem;
+.hero-section {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    background-image: url('/images/A7407803.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+        height: 50vh;
+        min-height: 300px;
+        background-attachment: scroll;
     }
 }
 
-.page-header {
-    text-align: center;
-    margin-bottom: 1rem;
-    padding: 1rem 0;
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(90, 74, 58, 0.7) 0%,
+        rgba(139, 115, 85, 0.6) 50%,
+        rgba(168, 144, 132, 0.5) 100%
+    );
+    backdrop-filter: blur(1px);
 }
 
-.page-description {
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+    max-width: 600px;
+}
+
+.hero-ornament {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+    
+    &.bottom {
+        margin-top: 1rem;
+        margin-bottom: 0;
+        transform: rotate(180deg);
+    }
+
+    @media (min-width: 768px) {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        
+        &.bottom {
+            margin-top: 1.5rem;
+        }
+    }
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: normal;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.1rem;
+
+    @media (min-width: 768px) {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    opacity: 0.95;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    line-height: 1.6;
+
+    @media (min-width: 768px) {
+        font-size: 1.3rem;
+    }
+}
+
+.main-content {
+    position: relative;
+    z-index: 3;
+    margin-top: -100px;
+    padding: 0 1rem 3rem;
+
+    @media (min-width: 768px) {
+        padding: 0 2rem 4rem;
+        margin-top: -120px;
+    }
+}
+
+.attendance-form {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 40px rgba(90, 74, 58, 0.1),
+        0 8px 16px rgba(90, 74, 58, 0.05);
+    padding: 3rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    @media (min-width: 768px) {
+        padding: 4rem 3rem;
+    }
+}
+
+.form-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+    gap: 1.5rem;
+
+    @media (min-width: 768px) {
+        margin-bottom: 4rem;
+        gap: 2rem;
+    }
+}
+
+.decorative-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(139, 115, 85, 0.3),
+        transparent
+    );
+    max-width: 100px;
+
+    @media (min-width: 768px) {
+        max-width: 150px;
+    }
+}
+
+.form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #5a4a3a;
+    font-weight: normal;
+    white-space: nowrap;
+    letter-spacing: 0.05rem;
+
+    @media (min-width: 768px) {
+        font-size: 1.8rem;
+    }
+}
+
+.attendees-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+
+    @media (min-width: 768px) {
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+    }
+}
+
+.attendee-card {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(168, 144, 132, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(90, 74, 58, 0.1);
+        border-color: rgba(139, 115, 85, 0.3);
+    }
+
+    @media (min-width: 768px) {
+        padding: 2.5rem;
+    }
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.guest-number {
     font-family: 'Playfair Display', serif;
     font-size: 1rem;
     color: #8b7355;
-    line-height: 1.6;
-    font-style: italic;
-    max-width: 600px;
-    margin: 0 auto;
+    font-weight: 500;
+    letter-spacing: 0.05rem;
 
     @media (min-width: 768px) {
         font-size: 1.1rem;
     }
 }
 
-.attendance-form {
-    margin-bottom: 2rem;
+.remove-button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 1px solid rgba(231, 76, 60, 0.3);
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+
+    &:hover {
+        background: #e74c3c;
+        color: white;
+        transform: scale(1.1);
+    }
+
+    @media (min-width: 768px) {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.4rem;
+    }
 }
 
-.form-section {
-    margin-bottom: 2rem;
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @media (min-width: 768px) {
+        gap: 2rem;
+    }
 }
 
-.section-title {
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-label {
     font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
+    font-size: 0.9rem;
+    color: #5a4a3a;
+    font-weight: 500;
+    letter-spacing: 0.02rem;
+
+    @media (min-width: 768px) {
+        font-size: 1rem;
+    }
+}
+
+.elegant-input {
+    padding: 1rem 1.25rem;
+    border: 2px solid rgba(168, 144, 132, 0.2);
+    border-radius: 12px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    color: #5a4a3a;
+
+    &:focus {
+        outline: none;
+        border-color: #8b7355;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+        transform: translateY(-1px);
+    }
+
+    &::placeholder {
+        color: #a89084;
+        font-style: italic;
+    }
+
+    &.secondary {
+        border-style: dashed;
+        border-color: rgba(168, 144, 132, 0.15);
+        
+        &:focus {
+            border-style: solid;
+        }
+    }
+
+    @media (min-width: 768px) {
+        padding: 1.25rem 1.5rem;
+        font-size: 1.05rem;
+    }
+}
+
+.add-guest-section {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(168, 144, 132, 0.1);
+    border-bottom: 1px solid rgba(168, 144, 132, 0.1);
+
+    @media (min-width: 768px) {
+        margin-bottom: 4rem;
+    }
+}
+
+.add-guest-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, rgba(139, 115, 85, 0.1), rgba(168, 144, 132, 0.1));
+    border: 2px dashed rgba(139, 115, 85, 0.3);
+    border-radius: 12px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    color: #5a4a3a;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 400;
+
+    &:hover {
+        background: linear-gradient(135deg, rgba(139, 115, 85, 0.15), rgba(168, 144, 132, 0.15));
+        border-color: #8b7355;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139, 115, 85, 0.2);
+    }
+
+    .btn-icon {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    @media (min-width: 768px) {
+        padding: 1.25rem 2.5rem;
+        font-size: 1rem;
+        gap: 1rem;
+    }
+}
+
+.submit-section {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.submit-ornament {
+    font-size: 1.5rem;
+    color: rgba(139, 115, 85, 0.4);
+    
+    @media (min-width: 768px) {
+        font-size: 2rem;
+    }
+}
+
+.submit-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 3rem;
+    background: linear-gradient(135deg, #5a4a3a, #4a3a2a);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+        transition: opacity 0.3s ease;
+    }
+
+    &:hover:not(:disabled) {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(90, 74, 58, 0.3);
+        
+        .submit-icon {
+            transform: translateX(5px);
+        }
+    }
+
+    &:disabled {
+        background: linear-gradient(135deg, #ccc, #bbb);
+        cursor: not-allowed;
+        opacity: 0.6;
+        
+        &:hover {
+            transform: none;
+            box-shadow: none;
+        }
+    }
+
+    .submit-icon {
+        transition: transform 0.3s ease;
+        font-size: 1.2rem;
+    }
+
+    @media (min-width: 768px) {
+        padding: 1.5rem 4rem;
+        font-size: 1.1rem;
+    }
+}
+
+.success-state {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.success-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 40px rgba(90, 74, 58, 0.1),
+        0 8px 16px rgba(90, 74, 58, 0.05);
+    padding: 3rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    text-align: center;
+
+    @media (min-width: 768px) {
+        padding: 4rem 3rem;
+    }
+}
+
+.success-icon-wrapper {
+    margin-bottom: 2rem;
+}
+
+.success-icon {
+    width: 5rem;
+    height: 5rem;
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+
+    @media (min-width: 768px) {
+        width: 6rem;
+        height: 6rem;
+        font-size: 3rem;
+    }
+}
+
+.success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #5a4a3a;
+    margin-bottom: 1rem;
+    font-weight: normal;
+
+    @media (min-width: 768px) {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.success-message {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #8b7355;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 3rem;
+
+    @media (min-width: 768px) {
+        font-size: 1.2rem;
+        margin-bottom: 4rem;
+    }
+}
+
+.attendees-summary {
+    text-align: left;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    border: 1px solid rgba(168, 144, 132, 0.1);
+
+    @media (min-width: 768px) {
+        padding: 2.5rem;
+        margin-bottom: 4rem;
+    }
+}
+
+.summary-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
     color: #5a4a3a;
     margin-bottom: 1.5rem;
     font-weight: normal;
+    text-align: center;
 
     @media (min-width: 768px) {
         font-size: 1.5rem;
@@ -196,7 +712,7 @@ const resetForm = () => {
     }
 }
 
-.attendees-list {
+.summary-list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -206,327 +722,61 @@ const resetForm = () => {
     }
 }
 
-.attendee-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 8px;
-    border: 1px solid rgba(168, 144, 132, 0.2);
-
-    @media (min-width: 768px) {
-        padding: 1.5rem;
-        border-radius: 12px;
-    }
-}
-
-.row-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    color: #8b7355;
-    font-weight: bold;
-    min-width: 1.5rem;
-    margin-top: 0.5rem;
-
-    @media (min-width: 768px) {
-        font-size: 1.1rem;
-    }
-}
-
-.attendee-fields {
-    flex: 1;
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-}
-
-.field-group {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-
-    @media (min-width: 768px) {
-        gap: 1rem;
-    }
-}
-
-.name-input,
-.allergies-input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid rgba(168, 144, 132, 0.3);
-    border-radius: 8px;
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    background: rgba(255, 255, 255, 0.9);
-    transition: all 0.3s;
-
-    @media (min-width: 768px) {
-        padding: 1rem 1.25rem;
-        font-size: 1rem;
-    }
-
-    &:focus {
-        outline: none;
-        border-color: #5a4a3a;
-        box-shadow: 0 0 0 2px rgba(90, 74, 58, 0.1);
-        background: rgba(255, 255, 255, 1);
-    }
-
-    &::placeholder {
-        color: #a89084;
-        font-style: italic;
-    }
-}
-
-.remove-btn {
-    background: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: all 0.3s;
-    margin-top: 0.375rem;
-
-    @media (min-width: 768px) {
-        width: 2.5rem;
-        height: 2.5rem;
-        font-size: 1.4rem;
-    }
-
-    &:hover {
-        background: #c0392b;
-        transform: scale(1.1);
-    }
-}
-
-.form-actions {
-    margin-top: 1.5rem;
-    text-align: center;
-
-    @media (min-width: 768px) {
-        margin-top: 2rem;
-    }
-}
-
-.add-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    background: rgba(90, 74, 58, 0.1);
-    color: #5a4a3a;
-    border: 2px dashed rgba(90, 74, 58, 0.3);
-    border-radius: 8px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s;
-
-    @media (min-width: 768px) {
-        padding: 1rem 2rem;
-        font-size: 1rem;
-    }
-
-    &:hover {
-        background: rgba(90, 74, 58, 0.15);
-        border-color: #5a4a3a;
-        transform: translateY(-1px);
-    }
-
-    .btn-icon {
-        font-size: 1.2rem;
-        font-weight: bold;
-    }
-}
-
-.submit-section {
-    text-align: center;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(168, 144, 132, 0.2);
-}
-
-.submit-btn {
-    padding: 1rem 3rem;
-    background: #5a4a3a;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s;
-
-    @media (min-width: 768px) {
-        padding: 1.25rem 4rem;
-        font-size: 1.1rem;
-    }
-
-    &:hover:not(:disabled) {
-        background: #4a3a2a;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(90, 74, 58, 0.3);
-    }
-
-    &:disabled {
-        background: #ccc;
-        cursor: not-allowed;
-        opacity: 0.6;
-    }
-}
-
-.submitted-attendance {
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 20px rgba(90, 74, 58, 0.1);
-
-    @media (min-width: 768px) {
-        padding: 3rem;
-        border-radius: 16px;
-    }
-}
-
-.success-message {
-    text-align: center;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(168, 144, 132, 0.2);
-}
-
-.success-icon {
-    width: 4rem;
-    height: 4rem;
-    background: #27ae60;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    margin: 0 auto 1.5rem;
-
-    @media (min-width: 768px) {
-        width: 5rem;
-        height: 5rem;
-        font-size: 2.5rem;
-    }
-}
-
-.success-message h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: #5a4a3a;
-    margin-bottom: 1rem;
-    font-weight: normal;
-
-    @media (min-width: 768px) {
-        font-size: 2rem;
-    }
-}
-
-.success-message p {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    color: #8b7355;
-    line-height: 1.6;
-    font-style: italic;
-
-    @media (min-width: 768px) {
-        font-size: 1.1rem;
-    }
-}
-
-.attendees-summary {
-    margin-bottom: 2rem;
-}
-
-.summary-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
-    color: #5a4a3a;
-    margin-bottom: 1.5rem;
-    font-weight: normal;
-
-    @media (min-width: 768px) {
-        font-size: 1.5rem;
-    }
-}
-
-.attendees-list-submitted {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.submitted-attendee {
+.summary-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 8px;
-    border: 1px solid rgba(168, 144, 132, 0.2);
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    border: 1px solid rgba(168, 144, 132, 0.1);
 
     @media (min-width: 768px) {
-        padding: 1.5rem;
-        border-radius: 12px;
+        padding: 2rem;
     }
 }
 
-.attendee-info {
+.attendee-details {
     flex: 1;
 }
 
 .attendee-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #5a4a3a;
-    font-weight: bold;
+    font-weight: 500;
     margin-bottom: 0.25rem;
 
     @media (min-width: 768px) {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 }
 
-.attendee-allergies {
+.attendee-notes {
     font-family: 'Playfair Display', serif;
     font-size: 0.9rem;
     color: #8b7355;
     font-style: italic;
+
+    @media (min-width: 768px) {
+        font-size: 1rem;
+    }
 }
 
-.attendance-toggle {
+.attendance-status {
     margin-left: 1rem;
 }
 
-.attendance-btn {
-    padding: 0.5rem 1rem;
-    border: 1px solid;
-    border-radius: 6px;
+.status-toggle {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid;
+    border-radius: 8px;
     font-family: 'Lato', sans-serif;
-    font-weight: 400;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s;
-    min-width: 80px;
-
-    @media (min-width: 768px) {
-        padding: 0.75rem 1.5rem;
-        font-size: 0.9rem;
-        min-width: 100px;
-    }
+    transition: all 0.3s ease;
+    min-width: 100px;
 
     &.attending {
         background: rgba(39, 174, 96, 0.1);
@@ -535,6 +785,7 @@ const resetForm = () => {
 
         &:hover {
             background: rgba(39, 174, 96, 0.2);
+            transform: translateY(-1px);
         }
     }
 
@@ -545,37 +796,44 @@ const resetForm = () => {
 
         &:hover {
             background: rgba(231, 76, 60, 0.2);
+            transform: translateY(-1px);
         }
     }
-}
-
-.form-actions-submitted {
-    text-align: center;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(168, 144, 132, 0.2);
-}
-
-.reset-btn {
-    padding: 0.75rem 2rem;
-    background: transparent;
-    color: #8b7355;
-    border: 1px solid rgba(139, 115, 85, 0.3);
-    border-radius: 8px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 400;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s;
 
     @media (min-width: 768px) {
-        padding: 1rem 2.5rem;
+        padding: 1rem 2rem;
         font-size: 1rem;
+        min-width: 120px;
     }
+}
+
+.edit-section {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(168, 144, 132, 0.1);
+}
+
+.edit-button {
+    padding: 1rem 2.5rem;
+    background: transparent;
+    color: #8b7355;
+    border: 2px solid rgba(139, 115, 85, 0.3);
+    border-radius: 8px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
 
     &:hover {
         background: rgba(139, 115, 85, 0.1);
         border-color: #8b7355;
         color: #5a4a3a;
+        transform: translateY(-2px);
+    }
+
+    @media (min-width: 768px) {
+        padding: 1.25rem 3rem;
+        font-size: 1rem;
     }
 }
 </style>
