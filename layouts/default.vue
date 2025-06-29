@@ -119,7 +119,7 @@ header {
         transition: all 0.3s ease;
 
         @media (min-width: 768px) {
-            max-width: 150px;
+            max-width: 100px;
         }
 
         @media (min-width: 1024px) {
