@@ -32,7 +32,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgb(0 0 0 / 70%) 0%, rgb(97 89 79 / 60%) 50%, rgb(193 173 163 / 50%) 100%);
     backdrop-filter: blur(0.5px);
 }
 
