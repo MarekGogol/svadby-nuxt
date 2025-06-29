@@ -1,7 +1,7 @@
 <template>
     <div class="attendance-page">
         <!-- Hero Section with Background Image -->
-        <AttendanceHero />
+        <PageHero background-image="/images/A7407803.jpg" />
 
         <div class="main-content">
             <AttendanceForm

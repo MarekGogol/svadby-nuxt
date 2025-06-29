@@ -1,16 +1,24 @@
 <template>
-    <div class="hero-section">
+    <div class="hero-section" :style="{ backgroundImage: `url(${backgroundImage})` }">
         <div class="hero-overlay"></div>
         <div class="hero-gradient-mask"></div>
     </div>
 </template>
+
+<script setup>
+const props = defineProps({
+    backgroundImage: {
+        type: String,
+        required: true
+    }
+});
+</script>
 
 <style lang="scss" scoped>
 .hero-section {
     position: relative;
     height: 50vh;
     min-height: 350px;
-    background-image: url('/images/A7407803.jpg');
     background-size: contain;
     background-position: top center;
     background-attachment: fixed;

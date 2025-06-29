@@ -1,16 +1,24 @@
 <template>
     <div class="photobook-page">
-        <PhotobookIntro />
+        <!-- Hero Section with Background Image -->
+        <PageHero background-image="/images/A7408267.jpg" />
 
-        <div class="upload-section">
-            <h2 class="section-title">{{ __('Nahrať fotografie') }}</h2>
-            <PhotoUploader :show-title="true" />
+        <div class="main-content">
+            <PhotobookIntro />
+
+            <div class="upload-section">
+                <h2 class="section-title">{{ __('Nahrať fotografie') }}</h2>
+                <PhotoUploader :show-title="true" />
+            </div>
+
+            <div class="preview-section">
+                <h2 class="section-title">{{ __('Náhľad fotoknihy') }}</h2>
+                <PhotobookGallery />
+            </div>
         </div>
 
-        <div class="preview-section">
-            <h2 class="section-title">{{ __('Náhľad fotoknihy') }}</h2>
-            <PhotobookGallery />
-        </div>
+        <!-- Bottom gradient to blend with background -->
+        <div class="bottom-gradient"></div>
     </div>
 </template>
 
@@ -24,12 +32,38 @@ await galleryStore.fetchPhotos(1);
 
 <style lang="scss" scoped>
 .photobook-page {
-    width: 100%;
-    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f6f1f0 0%, #ede3e0 100%);
+    position: relative;
+}
+
+.main-content {
+    position: relative;
+    z-index: 3;
+    margin-top: -6.5rem;
+    padding: 0 1rem 3rem;
 
     @media (min-width: 768px) {
-        padding: 0 1rem;
+        padding: 0 2rem 4rem;
+        margin-top: -100px;
     }
+}
+
+.bottom-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(246, 241, 240, 0.3) 30%,
+        rgba(246, 241, 240, 0.8) 70%,
+        #f6f1f0 100%
+    );
+    pointer-events: none;
+    z-index: 1;
 }
 
 .section-title {

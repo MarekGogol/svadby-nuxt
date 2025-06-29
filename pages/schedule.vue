@@ -1,26 +1,36 @@
 <template>
-    <div class="timeline">
-        <div
-            v-for="(group, date, index) in groupedEvents"
-            :key="date"
-            class="timeline-group"
-        >
-            <h2 class="timeline-title">
-                <div class="title-wrapper">
-                    <div class="day-number">{{ index + 1 }}. deň</div>
-                    <div class="date">{{ formatDate(date) }}</div>
-                </div>
-            </h2>
-            <div class="events">
-                <div v-for="event in group" :key="event.id" class="event">
-                    <div class="time">{{ formatTime(event.datetime) }}</div>
-                    <div class="details">
-                        <h3>{{ event.name }}</h3>
-                        <p>{{ event.description }}</p>
+    <div class="schedule-page">
+        <!-- Hero Section with Background Image -->
+        <PageHero background-image="/images/A7408042.jpg" />
+
+        <div class="main-content">
+            <div class="timeline">
+                <div
+                    v-for="(group, date, index) in groupedEvents"
+                    :key="date"
+                    class="timeline-group"
+                >
+                    <h2 class="timeline-title">
+                        <div class="title-wrapper">
+                            <div class="day-number">{{ index + 1 }}. deň</div>
+                            <div class="date">{{ formatDate(date) }}</div>
+                        </div>
+                    </h2>
+                    <div class="events">
+                        <div v-for="event in group" :key="event.id" class="event">
+                            <div class="time">{{ formatTime(event.datetime) }}</div>
+                            <div class="details">
+                                <h3>{{ event.name }}</h3>
+                                <p>{{ event.description }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Bottom gradient to blend with background -->
+        <div class="bottom-gradient"></div>
     </div>
 </template>
 
@@ -56,7 +66,57 @@ const formatTime = (dateTimeStr) => {
 </script>
 
 <style lang="scss" scoped>
+.schedule-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f6f1f0 0%, #ede3e0 100%);
+    position: relative;
+}
+
+.main-content {
+    position: relative;
+    z-index: 3;
+    margin-top: -6.5rem;
+    padding: 0 1rem 3rem;
+
+    @media (min-width: 768px) {
+        padding: 0 2rem 4rem;
+        margin-top: -100px;
+    }
+}
+
+.bottom-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(246, 241, 240, 0.3) 30%,
+        rgba(246, 241, 240, 0.8) 70%,
+        #f6f1f0 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
 .timeline {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 40px rgba(90, 74, 58, 0.1),
+        0 8px 16px rgba(90, 74, 58, 0.05);
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    @media (min-width: 768px) {
+        padding: 3rem;
+    }
+
     .timeline-group {
         margin-bottom: 4rem;
 
