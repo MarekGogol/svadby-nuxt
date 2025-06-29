@@ -3,13 +3,13 @@ export default defineNuxtConfig({
     ssr: false,
     compatibilityDate: '2025-01-09',
     devtools: { enabled: false },
-    modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt'],
+    modules: ['@pinia/nuxt'],
     components: {
         dirs: [
             {
                 path: '~/components',
                 pathPrefix: false,
-                prefix: ''
+                prefix: '',
             },
         ],
     },
