@@ -105,7 +105,8 @@ const updateAttendance = async (attendance) => {
     }
 
     .btn-attendance {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Lato', sans-serif;
+        font-weight: 400;
         padding: 0.5rem 1rem;
         border: 1px solid rgba(168, 144, 132, 0.4);
         background: rgba(255, 255, 255, 0.8);

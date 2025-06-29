@@ -54,7 +54,7 @@ const formatSideText = () => {
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap');
 
 .container {
     min-height: 100vh;
@@ -147,7 +147,8 @@ header {
     }
 
     .date {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
         font-size: 0.75rem;
         color: #a89084;
         letter-spacing: 0.25rem;

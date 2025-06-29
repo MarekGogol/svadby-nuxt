@@ -171,7 +171,8 @@ const scrollToUploadSection = () => {
     color: white;
     border: none;
     border-radius: 8px;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
