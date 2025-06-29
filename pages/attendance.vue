@@ -159,7 +159,6 @@ const resetForm = () => {
     text-align: center;
     margin-bottom: 3rem;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(168, 144, 132, 0.2);
 
     @media (min-width: 768px) {
         margin-bottom: 4rem;
