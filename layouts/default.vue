@@ -7,7 +7,7 @@
             <header>
                 <div class="date">{{ formattedDate }}</div>
                 <div class="logo-container" v-if="event?.name">
-                    <img src="/casopis_2x.png" alt="Logo" class="logo" />
+                    <img src="/images/casopis_2x.png" alt="Logo" class="logo" />
                 </div>
             </header>
 
