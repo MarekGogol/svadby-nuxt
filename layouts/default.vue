@@ -6,8 +6,8 @@
         <div class="content-wrapper">
             <header>
                 <div class="date">{{ formattedDate }}</div>
-                <div class="names" v-if="event?.name">
-                    {{ formatNames(event.name) }}
+                <div class="logo-container" v-if="event?.name">
+                    <img src="/časopis_2x.png" alt="Logo" class="main-logo" />
                 </div>
             </header>
 
@@ -110,15 +110,29 @@ header {
         }
     }
 
-    .names {
-        font-family: 'Times New Roman', serif;
-        font-size: 2.5rem;
-        line-height: 1.2;
-        color: #5a4a3a;
-        font-weight: normal;
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        .main-logo {
+            max-width: 200px;
+            height: auto;
+            filter: opacity(0.8);
+            transition: all 0.3s ease;
 
-        @media (min-width: 768px) {
-            font-size: 5rem;
+            @media (min-width: 768px) {
+                max-width: 300px;
+            }
+
+            @media (min-width: 1024px) {
+                max-width: 400px;
+            }
+
+            &:hover {
+                filter: opacity(1);
+                transform: scale(1.02);
+            }
         }
     }
 }
