@@ -68,7 +68,7 @@ const submitAttendance = () => {
     box-shadow: 
         0 20px 40px rgba(90, 74, 58, 0.1),
         0 8px 16px rgba(90, 74, 58, 0.05);
-    padding: 3rem 2rem;
+    padding: 1rem 2rem;
     border: 1px solid rgba(255, 255, 255, 0.8);
 
     @media (min-width: 768px) {
