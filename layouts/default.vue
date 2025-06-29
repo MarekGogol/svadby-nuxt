@@ -6,7 +6,7 @@
         <div class="content-wrapper">
             <header>
                 <div class="logo-container" v-if="event?.name">
-                    <img src="/images/casopis_2x.png" alt="Logo" class="logo" />
+                    <img src="/images/logo" alt="Logo" class="logo" />
                 </div>
                 <div class="names" v-if="event?.name">
                     {{ formatNames(event.name) }}
@@ -98,7 +98,7 @@ header {
 
     @media (min-width: 768px) {
         margin-bottom: 1.5rem;
-        padding: 0rem 1rem 0rem;
+        padding: 0rem 1rem 1rem;
     }
 
     .logo-container {
