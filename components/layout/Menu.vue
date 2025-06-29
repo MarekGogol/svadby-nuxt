@@ -24,11 +24,7 @@
     align-items: center;
     justify-content: space-evenly;
     padding: 1rem;
-    border-top: 1px solid rgba(168, 144, 132, 0.2);
-    border-bottom: 1px solid rgba(168, 144, 132, 0.2);
     flex-wrap: wrap;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 12px 12px 0 0;
 
     @media (min-width: 768px) {
         padding: 1.5rem;

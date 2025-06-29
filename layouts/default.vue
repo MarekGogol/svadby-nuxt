@@ -160,8 +160,6 @@ header {
 }
 
 .content {
-    background-color: white;
-    border: none;
     max-width: 800px;
     margin: 0 auto;
 }
