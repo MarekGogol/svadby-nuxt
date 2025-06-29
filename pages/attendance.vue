@@ -159,10 +159,6 @@ const resetForm = () => {
     text-align: center;
     margin-bottom: 3rem;
     padding: 1rem 0;
-
-    @media (min-width: 768px) {
-        margin-bottom: 4rem;
-    }
 }
 
 .page-title {
