@@ -34,7 +34,7 @@
     .nav-link {
         font-family: 'Playfair Display', serif;
         font-size: 0.75rem;
-        color: #a89084;
+        color: #6d6d6d;
         text-decoration: none;
         letter-spacing: 0.15rem;
         transition: all 0.3s;

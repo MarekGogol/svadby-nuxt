@@ -104,6 +104,7 @@ header {
         margin-bottom: 0.5rem;
 
         @media (min-width: 768px) {
+            margin-top: 2rem;
             margin-bottom: 0.75rem;
         }
     }
@@ -115,11 +116,11 @@ header {
         transition: all 0.3s ease;
 
         @media (min-width: 768px) {
-            max-width: 100px;
+            max-width: 50px;
         }
 
         @media (min-width: 1024px) {
-            max-width: 100px;
+            max-width: 50px;
         }
 
         &:hover {
@@ -132,7 +133,7 @@ header {
         font-family: 'Playfair Display', serif;
         font-size: 2rem;
         line-height: 1.2;
-        color: #5a4a3a;
+        color: #3b3025;
         font-weight: 400;
         margin-bottom: 1rem;
 
@@ -146,7 +147,7 @@ header {
         font-family: 'Lato', sans-serif;
         font-weight: 300;
         font-size: 0.75rem;
-        color: #a89084;
+        color: #6d6d6d;
         letter-spacing: 0.25rem;
 
         @media (min-width: 768px) {

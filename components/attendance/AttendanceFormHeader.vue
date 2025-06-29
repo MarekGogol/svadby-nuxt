@@ -1,8 +1,6 @@
 <template>
     <div class="form-header">
-        <div class="decorative-line"></div>
         <h2 class="form-title">{{ __('Potvrdenie účasti') }}</h2>
-        <div class="decorative-line"></div>
     </div>
 </template>
 
@@ -17,22 +15,6 @@
     @media (min-width: 768px) {
         margin-bottom: 2.5rem;
         gap: 2rem;
-    }
-}
-
-.decorative-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(
-        to right,
-        transparent,
-        rgba(139, 115, 85, 0.3),
-        transparent
-    );
-    max-width: 100px;
-
-    @media (min-width: 768px) {
-        max-width: 150px;
     }
 }
 
