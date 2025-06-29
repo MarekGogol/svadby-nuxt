@@ -113,13 +113,13 @@ header {
     }
 
     .logo {
-        max-width: 100px;
+        max-width: 70px;
         height: auto;
         opacity: 0.9;
         transition: all 0.3s ease;
 
         @media (min-width: 768px) {
-            max-width: 70px;
+            max-width: 100px;
         }
 
         @media (min-width: 1024px) {
