@@ -6,7 +6,7 @@
         <div class="content-wrapper">
             <header>
                 <div class="logo-container" v-if="event?.name">
-                    <img src="/images/logo" alt="Logo" class="logo" />
+                    <img src="/images/logo.png" alt="Logo" class="logo" />
                 </div>
                 <div class="names" v-if="event?.name">
                     {{ formatNames(event.name) }}
