@@ -85,10 +85,6 @@ const formatSideText = () => {
     max-width: 1000px;
     margin: 0 auto;
     padding: 0;
-    
-    @media (min-width: 768px) {
-        padding: 2rem;
-    }
 }
 
 header {
