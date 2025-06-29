@@ -97,7 +97,7 @@ const calculatePosition = (index, total) => {
 .table-title {
     font-family: 'Playfair Display', serif;
     font-size: 0.75rem;
-    color: #a89084;
+    color: #6d6d6d;
     letter-spacing: 0.1rem;
     margin-bottom: 0.75rem;
     font-weight: normal;

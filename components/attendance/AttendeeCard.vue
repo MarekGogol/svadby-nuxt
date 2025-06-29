@@ -199,7 +199,7 @@ const handleRemove = () => {
     }
 
     &::placeholder {
-        color: #a89084;
+        color: #6d6d6d;
         font-style: italic;
     }
 

@@ -182,7 +182,7 @@ const handleDrop = (event) => {
         }
 
         &::placeholder {
-            color: #a89084;
+            color: #6d6d6d;
         }
     }
 

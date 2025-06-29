@@ -128,7 +128,7 @@ const formatTime = (dateTimeStr) => {
         .date {
             font-family: 'Playfair Display', serif;
             font-size: 1rem;
-            color: #a89084;
+            color: #6d6d6d;
             letter-spacing: 0.2rem;
             text-transform: uppercase;
         }
@@ -153,7 +153,7 @@ const formatTime = (dateTimeStr) => {
         .time {
             font-family: 'Playfair Display', serif;
             font-size: 0.875rem;
-            color: #a89084;
+            color: #6d6d6d;
         }
 
         .details {
