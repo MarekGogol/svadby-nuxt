@@ -7,7 +7,7 @@
             <header>
                 <div class="date">{{ formattedDate }}</div>
                 <div class="logo-container" v-if="event?.name">
-                    <img src="/časopis_2x.png" alt="Logo" class="main-logo" />
+                    <img src="/casopis_2x.png" alt="Logo" class="logo" />
                 </div>
             </header>
 
@@ -56,7 +56,6 @@ const formatSideText = () => {
     position: relative;
     display: flex;
     padding: 0;
-    background-color: #f6f1f0;
 }
 
 .side-text {
@@ -66,7 +65,7 @@ const formatSideText = () => {
     transform: translateY(-50%) rotate(-90deg);
     font-family: 'Times New Roman', serif;
     font-size: 1rem;
-    color: #a89084;
+    color: #999;
     letter-spacing: 0.5rem;
     white-space: nowrap;
     display: none;
@@ -100,7 +99,7 @@ header {
     .date {
         font-family: 'Times New Roman', serif;
         font-size: 0.75rem;
-        color: #a89084;
+        color: #999;
         letter-spacing: 0.25rem;
         margin-bottom: 1.5rem;
 
@@ -114,37 +113,34 @@ header {
         display: flex;
         justify-content: center;
         align-items: center;
-        
-        .main-logo {
-            max-width: 200px;
-            height: auto;
-            filter: opacity(0.8);
-            transition: all 0.3s ease;
+    }
 
-            @media (min-width: 768px) {
-                max-width: 300px;
-            }
+    .logo {
+        max-width: 200px;
+        height: auto;
+        opacity: 0.9;
+        transition: all 0.3s ease;
 
-            @media (min-width: 1024px) {
-                max-width: 400px;
-            }
+        @media (min-width: 768px) {
+            max-width: 300px;
+        }
 
-            &:hover {
-                filter: opacity(1);
-                transform: scale(1.02);
-            }
+        @media (min-width: 1024px) {
+            max-width: 400px;
+        }
+
+        &:hover {
+            opacity: 1;
+            transform: scale(1.02);
         }
     }
 }
 
 .content {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
     border: none;
     max-width: 800px;
     margin: 0 auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(90, 74, 58, 0.08);
-    backdrop-filter: blur(10px);
 }
 
 .page-content {
