@@ -3,6 +3,7 @@
         <!-- Hero Section with Background Image -->
         <div class="hero-section">
             <div class="hero-overlay"></div>
+            <div class="hero-gradient-mask"></div>
             <!-- <div class="hero-content">
                 <div class="hero-ornament">❦</div>
                 <h1 class="hero-title">{{ __('Potvrdenie účasti') }}</h1>
@@ -216,6 +217,23 @@ const resetForm = () => {
     height: 100%;
     background: linear-gradient(135deg, rgb(0 0 0 / 70%) 0%, rgb(97 89 79 / 60%) 50%, rgb(193 173 163 / 50%) 100%);
     backdrop-filter: blur(0.5px);
+}
+
+.hero-gradient-mask {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(246, 241, 240, 0.2) 20%,
+        rgba(246, 241, 240, 0.5) 50%,
+        rgba(246, 241, 240, 0.8) 80%,
+        #f6f1f0 100%
+    );
+    z-index: 3;
 }
 
 .hero-content {
