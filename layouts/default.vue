@@ -5,10 +5,13 @@
         </div>
         <div class="content-wrapper">
             <header>
-                <div class="date">{{ formattedDate }}</div>
                 <div class="logo-container" v-if="event?.name">
                     <img src="/images/casopis_2x.png" alt="Logo" class="logo" />
                 </div>
+                <div class="names" v-if="event?.name">
+                    {{ formatNames(event.name) }}
+                </div>
+                <div class="date">{{ formattedDate }}</div>
             </header>
 
             <div class="content">
@@ -51,6 +54,8 @@ const formatSideText = () => {
 </script>
 
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
 .container {
     min-height: 100vh;
     position: relative;
@@ -96,23 +101,15 @@ header {
         padding: 4rem 1rem 1.5rem;
     }
 
-    .date {
-        font-family: 'Times New Roman', serif;
-        font-size: 0.75rem;
-        color: #999;
-        letter-spacing: 0.25rem;
-        margin-bottom: 1.5rem;
-
-        @media (min-width: 768px) {
-            font-size: 0.875rem;
-            margin-bottom: 2rem;
-        }
-    }
-
     .logo-container {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-bottom: 1.5rem;
+
+        @media (min-width: 768px) {
+            margin-bottom: 2rem;
+        }
     }
 
     .logo {
@@ -132,6 +129,31 @@ header {
         &:hover {
             opacity: 1;
             transform: scale(1.02);
+        }
+    }
+
+    .names {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        line-height: 1.2;
+        color: #5a4a3a;
+        font-weight: 400;
+        margin-bottom: 1rem;
+
+        @media (min-width: 768px) {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    .date {
+        font-family: 'Times New Roman', serif;
+        font-size: 0.75rem;
+        color: #a89084;
+        letter-spacing: 0.25rem;
+
+        @media (min-width: 768px) {
+            font-size: 0.875rem;
         }
     }
 }
