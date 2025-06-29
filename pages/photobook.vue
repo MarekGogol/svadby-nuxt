@@ -33,7 +33,7 @@ await galleryStore.fetchPhotos(1);
 }
 
 .section-title {
-    font-family: 'Times New Roman', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.25rem;
     color: #5a4a3a;
     text-align: center;

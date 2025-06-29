@@ -56,7 +56,7 @@ const updateAttendance = async (attendance) => {
 
 .current-guest, .guest-info {
     h2 {
-        font-family: 'Times New Roman', serif;
+        font-family: 'Playfair Display', serif;
         font-size: 1.5rem;
         font-weight: normal;
         margin-bottom: 1rem;
@@ -71,7 +71,7 @@ const updateAttendance = async (attendance) => {
 
 .guest-info {
     .attendance-status {
-        font-family: 'Times New Roman', serif;
+        font-family: 'Playfair Display', serif;
         font-size: 1rem;
         color: #8b7355;
         font-style: italic;
@@ -83,7 +83,7 @@ const updateAttendance = async (attendance) => {
 }
 
 .guest-prompt {
-    font-family: 'Times New Roman', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
     color: #8b7355;
     font-style: italic;
@@ -105,7 +105,7 @@ const updateAttendance = async (attendance) => {
     }
 
     .btn-attendance {
-        font-family: 'Times New Roman', serif;
+        font-family: 'Playfair Display', serif;
         padding: 0.5rem 1rem;
         border: 1px solid rgba(168, 144, 132, 0.4);
         background: rgba(255, 255, 255, 0.8);

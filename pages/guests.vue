@@ -54,8 +54,8 @@ await guestsStore.fetchGuests();
 .loading {
     text-align: center;
     padding: 2rem;
-    font-family: 'Times New Roman', serif;
-    color: #666;
+    font-family: 'Playfair Display', serif;
+    color: #8b7355;
     font-style: italic;
 }
 

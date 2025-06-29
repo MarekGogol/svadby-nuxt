@@ -38,7 +38,7 @@
     }
 
     .nav-link {
-        font-family: 'Times New Roman', serif;
+        font-family: 'Playfair Display', serif;
         font-size: 0.75rem;
         color: #a89084;
         text-decoration: none;

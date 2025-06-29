@@ -164,7 +164,7 @@ const handleDrop = (event) => {
         padding: 0.5rem 0.75rem;
         border: 1px solid rgba(168, 144, 132, 0.3);
         border-radius: 8px;
-        font-family: 'Lato', sans-serif;
+        font-family: 'Playfair Display', serif;
         font-size: 0.9rem;
         transition: all 0.3s;
         background: rgba(255, 255, 255, 0.9);
@@ -238,6 +238,7 @@ const handleDrop = (event) => {
             color: #8b7355;
             margin: 0;
             font-size: 0.9rem;
+            font-family: 'Playfair Display', serif;
 
             @media (min-width: 768px) {
                 font-size: 1rem;
@@ -288,6 +289,7 @@ const handleDrop = (event) => {
             font-size: 0.85rem;
             color: #8b7355;
             min-width: 3rem;
+            font-family: 'Playfair Display', serif;
 
             @media (min-width: 768px) {
                 font-size: 0.9rem;
@@ -298,6 +300,7 @@ const handleDrop = (event) => {
         .selected-file {
             font-size: 0.85rem;
             color: #8b7355;
+            font-family: 'Playfair Display', serif;
 
             @media (min-width: 768px) {
                 font-size: 0.9rem;

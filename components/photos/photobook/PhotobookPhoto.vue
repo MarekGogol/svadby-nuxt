@@ -59,7 +59,7 @@ defineProps({
     text-align: center;
     font-size: 0.7rem;
     color: #000;
-    font-family: 'Times New Roman', serif;
+    font-family: 'Playfair Display', serif;
     font-style: italic;
     white-space: nowrap;
     overflow: hidden;

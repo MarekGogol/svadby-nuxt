@@ -67,14 +67,14 @@ const formattedDate = computed(() => {
     padding: 3rem;
 
     h1 {
-        font-family: 'Times New Roman', serif;
+        font-family: 'Playfair Display', serif;
         font-size: clamp(1.5rem, 4vw, 2.5rem);
         margin-bottom: 1rem;
         font-weight: normal;
     }
 
     .cover-date {
-        font-family: 'Times New Roman', serif;
+        font-family: 'Playfair Display', serif;
         font-size: clamp(0.9rem, 2vw, 1.2rem);
         color: rgba(255, 255, 255, 0.8);
     }

@@ -99,7 +99,7 @@ onUnmounted(() => {
         font-size: 0.85rem;
         font-weight: 500;
         color: #8b7355;
-        font-family: 'Times New Roman', serif;
+        font-family: 'Playfair Display', serif;
 
         @media (min-width: 768px) {
             padding: 0 1rem;
@@ -125,7 +125,7 @@ onUnmounted(() => {
     text-align: center;
     padding: 1rem;
     color: #8b7355;
-    font-family: 'Times New Roman', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 0.85rem;
 
     @media (min-width: 768px) {

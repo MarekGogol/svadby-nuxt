@@ -68,7 +68,7 @@ const formatSideText = () => {
     left: 2rem;
     top: 50%;
     transform: translateY(-50%) rotate(-90deg);
-    font-family: 'Times New Roman', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1rem;
     color: #999;
     letter-spacing: 0.5rem;
@@ -147,7 +147,7 @@ header {
     }
 
     .date {
-        font-family: 'Times New Roman', serif;
+        font-family: 'Playfair Display', serif;
         font-size: 0.75rem;
         color: #a89084;
         letter-spacing: 0.25rem;

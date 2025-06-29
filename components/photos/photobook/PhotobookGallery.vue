@@ -133,7 +133,7 @@ onUnmounted(() => {
     text-align: center;
     padding: 1rem;
     color: #8b7355;
-    font-family: 'Times New Roman', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 0.9rem;
 
     @media (min-width: 768px) {

@@ -111,7 +111,7 @@ const scrollToUploadSection = () => {
 }
 
 .title {
-    font-family: 'Times New Roman', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.75rem;
     color: #5a4a3a;
     margin-bottom: 1.5rem;
@@ -149,7 +149,7 @@ const scrollToUploadSection = () => {
 }
 
 .description {
-    font-family: 'Times New Roman', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1rem;
     color: #8b7355;
     line-height: 1.8;
@@ -171,7 +171,7 @@ const scrollToUploadSection = () => {
     color: white;
     border: none;
     border-radius: 8px;
-    font-family: 'Times New Roman', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -279,7 +279,7 @@ const scrollToUploadSection = () => {
     }
 
     .text {
-        font-family: 'Times New Roman', serif;
+        font-family: 'Playfair Display', serif;
         font-size: 0.9rem;
         color: #5a4a3a;
         text-align: center;

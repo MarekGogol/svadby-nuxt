@@ -95,7 +95,7 @@ const calculatePosition = (index, total) => {
 }
 
 .table-title {
-    font-family: 'Times New Roman', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 0.75rem;
     color: #a89084;
     letter-spacing: 0.1rem;
@@ -179,7 +179,7 @@ const calculatePosition = (index, total) => {
 }
 
 .table-number {
-    font-family: 'Times New Roman', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
     color: #8b7355;
     text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
@@ -199,7 +199,7 @@ const calculatePosition = (index, total) => {
 .guest-item {
     position: absolute;
     transform: translate(-50%, -50%);
-    font-family: 'Times New Roman', serif;
+    font-family: 'Playfair Display', serif;
     padding: 0.35rem 0.75rem;
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(168, 144, 132, 0.3);

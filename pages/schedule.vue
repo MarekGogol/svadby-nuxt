@@ -118,7 +118,7 @@ const formatTime = (dateTimeStr) => {
         }
 
         .day-number {
-            font-family: 'Times New Roman', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1.75rem;
             color: #5a4a3a;
             font-weight: normal;
@@ -126,7 +126,7 @@ const formatTime = (dateTimeStr) => {
         }
 
         .date {
-            font-family: 'Times New Roman', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 1rem;
             color: #a89084;
             letter-spacing: 0.2rem;
@@ -151,14 +151,14 @@ const formatTime = (dateTimeStr) => {
         }
 
         .time {
-            font-family: 'Times New Roman', serif;
+            font-family: 'Playfair Display', serif;
             font-size: 0.875rem;
             color: #a89084;
         }
 
         .details {
             h3 {
-                font-family: 'Times New Roman', serif;
+                font-family: 'Playfair Display', serif;
                 font-size: 1.25rem;
                 color: #5a4a3a;
                 margin-bottom: 0.5rem;
@@ -166,7 +166,7 @@ const formatTime = (dateTimeStr) => {
             }
 
             p {
-                font-family: 'Times New Roman', serif;
+                font-family: 'Playfair Display', serif;
                 font-size: 1rem;
                 color: #8b7355;
                 line-height: 1.5;
