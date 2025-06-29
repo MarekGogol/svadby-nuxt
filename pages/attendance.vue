@@ -1,14 +1,15 @@
 <template>
     <div class="attendance-page">
         <div class="page-header">
-            <h1 class="page-title">{{ __('Účasť na svadbe') }}</h1>
             <p class="page-description">
                 {{ __('Prosím, potvrďte svoju účasť na našej svadbe. Môžete pridať viacero osôb naraz.') }}
             </p>
         </div>
 
         <div v-if="!attendanceStore.isSubmitted" class="attendance-form">
-            <div class="form-section">               
+            <div class="form-section">
+                <h2 class="section-title">{{ __('Pridať účastníkov') }}</h2>
+                
                 <div class="attendees-list">
                     <div 
                         v-for="(attendee, index) in attendanceStore.attendees" 
