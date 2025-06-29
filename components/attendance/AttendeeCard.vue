@@ -120,16 +120,20 @@ const handleRemove = () => {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 1.1rem;
-    line-height: 1;
     padding: 0;
+    margin: 0;
 
     span {
+        font-size: 1.1rem;
+        line-height: 1;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         height: 100%;
+        font-family: Arial, sans-serif;
+        font-weight: normal;
+        transform: translateY(-1px); /* Fine-tune vertical centering */
     }
 
     &:hover {
@@ -141,7 +145,10 @@ const handleRemove = () => {
     @media (min-width: 768px) {
         width: 2rem;
         height: 2rem;
-        font-size: 1.2rem;
+        
+        span {
+            font-size: 1.2rem;
+        }
     }
 }
 
