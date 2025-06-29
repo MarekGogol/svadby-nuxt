@@ -3,14 +3,14 @@
         <!-- Hero Section with Background Image -->
         <div class="hero-section">
             <div class="hero-overlay"></div>
-            <div class="hero-content">
+            <!-- <div class="hero-content">
                 <div class="hero-ornament">❦</div>
                 <h1 class="hero-title">{{ __('Potvrdenie účasti') }}</h1>
                 <p class="hero-subtitle">
                     {{ __('Vaša prítomnosť je pre nás najkrajším darom') }}
                 </p>
                 <div class="hero-ornament bottom">❦</div>
-            </div>
+            </div> -->
         </div>
 
         <div class="main-content">
