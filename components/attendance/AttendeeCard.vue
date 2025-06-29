@@ -2,7 +2,7 @@
     <div class="attendee-card">
         <div class="card-header">
             <div class="guest-number">{{ index + 1 }}. {{ __('hosť') }}</div>
-            <button 
+            <button
                 v-if="showRemove"
                 @click="handleRemove"
                 class="remove-button"
@@ -11,7 +11,7 @@
                 <span>×</span>
             </button>
         </div>
-        
+
         <div class="card-content">
             <div class="input-group">
                 <label class="input-label">{{ __('Meno a priezvisko') }}</label>
@@ -23,9 +23,11 @@
                     @input="handleUpdate('name', $event.target.value)"
                 />
             </div>
-            
+
             <div class="input-group">
-                <label class="input-label">{{ __('Špeciálne požiadavky') }}</label>
+                <label class="input-label">
+                    {{ __('Špeciálne požiadavky') }}
+                </label>
                 <input
                     :value="attendee.allergies"
                     type="text"
@@ -42,16 +44,16 @@
 const props = defineProps({
     attendee: {
         type: Object,
-        required: true
+        required: true,
     },
     index: {
         type: Number,
-        required: true
+        required: true,
     },
     showRemove: {
         type: Boolean,
-        default: false
-    }
+        default: false,
+    },
 });
 
 const emit = defineEmits(['update', 'remove']);
@@ -124,16 +126,14 @@ const handleRemove = () => {
     margin: 0;
 
     span {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         line-height: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         width: 100%;
         height: 100%;
         font-family: Arial, sans-serif;
         font-weight: normal;
-        transform: translateY(-1px); /* Fine-tune vertical centering */
+        transform: translateY(4px);
+        display: block;
     }
 
     &:hover {
@@ -145,7 +145,7 @@ const handleRemove = () => {
     @media (min-width: 768px) {
         width: 2rem;
         height: 2rem;
-        
+
         span {
             font-size: 1.2rem;
         }
@@ -206,7 +206,7 @@ const handleRemove = () => {
     &.secondary {
         border-style: dashed;
         border-color: rgba(168, 144, 132, 0.15);
-        
+
         &:focus {
             border-style: solid;
         }
