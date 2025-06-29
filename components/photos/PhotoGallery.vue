@@ -81,7 +81,7 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     margin: 1rem 0;
-    color: #666;
+    color: #8b7355;
 
     @media (min-width: 768px) {
         margin: 2rem 0;
@@ -91,14 +91,14 @@ onUnmounted(() => {
         flex: 1;
         border: none;
         height: 1px;
-        background: #ddd;
+        background: rgba(168, 144, 132, 0.3);
     }
 
     span {
         padding: 0 0.5rem;
         font-size: 0.85rem;
         font-weight: 500;
-        color: #666;
+        color: #8b7355;
         font-family: 'Times New Roman', serif;
 
         @media (min-width: 768px) {
@@ -124,7 +124,7 @@ onUnmounted(() => {
 .loading-wrapper {
     text-align: center;
     padding: 1rem;
-    color: #666;
+    color: #8b7355;
     font-family: 'Times New Roman', serif;
     font-size: 0.85rem;
 

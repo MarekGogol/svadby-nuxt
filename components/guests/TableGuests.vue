@@ -82,21 +82,22 @@ const calculatePosition = (index, total) => {
 <style lang="scss" scoped>
 .table-section {
     margin-bottom: 1.05rem; // Reduced by 30% from 1.5rem
-    background: transparent;
+    background: rgba(255, 255, 255, 0.6);
     padding: 0.5rem;
-    border-radius: 0.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(90, 74, 58, 0.08);
 
     @media (min-width: 768px) {
         margin-bottom: 2.1rem; // Reduced by 30% from 3rem
         padding: 1rem;
-        border-radius: 1rem;
+        border-radius: 16px;
     }
 }
 
 .table-title {
     font-family: 'Times New Roman', serif;
     font-size: 0.75rem;
-    color: #999;
+    color: #a89084;
     letter-spacing: 0.1rem;
     margin-bottom: 0.75rem;
     font-weight: normal;
@@ -140,24 +141,24 @@ const calculatePosition = (index, total) => {
     height: 100%;
     background: 
         radial-gradient(circle at center, 
-            rgba(255,255,255,0.5) 0%, 
-            rgba(255,255,255,0.2) 100%),
+            rgba(255,255,255,0.8) 0%, 
+            rgba(255,255,255,0.4) 100%),
         repeating-radial-gradient(
             circle at center,
-            #F0E5D4, /* Lighter base color */
-            #F0E5D4 2px,
-            #E5DAC9 2px, /* Lighter secondary color */
-            #E5DAC9 4px
+            #f0e5d4, /* Warmer base color */
+            #f0e5d4 2px,
+            #e5dac9 2px, /* Warmer secondary color */
+            #e5dac9 4px
         );
-    border: 4px solid #D4C9B8; /* Lighter border color */
+    border: 4px solid #d4c9b8; /* Warmer border color */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 
-        inset 0 2px 5px rgba(255,255,255,0.4),
-        inset 0 -2px 5px rgba(0,0,0,0.05),
-        0 5px 15px rgba(0,0,0,0.05);
+        inset 0 2px 5px rgba(255,255,255,0.6),
+        inset 0 -2px 5px rgba(90, 74, 58, 0.1),
+        0 5px 15px rgba(90, 74, 58, 0.1);
     
     &::after {
         content: '';
@@ -166,7 +167,7 @@ const calculatePosition = (index, total) => {
         left: 50%;
         width: calc(100% - 16px);
         height: calc(100% - 16px);
-        border: 2px solid rgba(212, 201, 184, 0.2); /* Lighter inner border */
+        border: 2px solid rgba(212, 201, 184, 0.3);
         border-radius: 50%;
         transform: translate(-50%, -50%);
 
@@ -180,8 +181,8 @@ const calculatePosition = (index, total) => {
 .table-number {
     font-family: 'Times New Roman', serif;
     font-size: 1.5rem;
-    color: #9E8E73; /* Lighter text color */
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+    color: #8b7355;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
 
     @media (min-width: 768px) {
         font-size: 2.5rem;
@@ -200,15 +201,15 @@ const calculatePosition = (index, total) => {
     transform: translate(-50%, -50%);
     font-family: 'Times New Roman', serif;
     padding: 0.35rem 0.75rem;
-    background: white;
-    border: 1px solid #eee;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(168, 144, 132, 0.3);
     border-radius: 15px;
-    color: #666;
+    color: #8b7355;
     text-align: center;
     user-select: none;
     white-space: nowrap;
     transition: all 0.3s ease;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px rgba(90, 74, 58, 0.1);
     font-size: 0.75rem;
     max-width: 120px;
     overflow: hidden;
@@ -219,46 +220,49 @@ const calculatePosition = (index, total) => {
         font-size: 1rem;
         border-radius: 25px;
         max-width: 200px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 4px rgba(90, 74, 58, 0.1);
     }
 
     &.is-clickable {
         cursor: pointer;
         
         &:hover {
-            border-color: #000;
-            color: #000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-color: #5a4a3a;
+            color: #5a4a3a;
+            box-shadow: 0 2px 4px rgba(90, 74, 58, 0.2);
+            background: rgba(255, 255, 255, 1);
 
             @media (min-width: 768px) {
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 8px rgba(90, 74, 58, 0.2);
             }
         }
     }
 
     &.is-current-user {
         border-style: dashed;
+        border-color: #8b7355;
     }
 
     &.is-selected {
-        border-color: #000;
-        color: #000;
+        border-color: #5a4a3a;
+        color: #5a4a3a;
         font-weight: bold;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 6px rgba(90, 74, 58, 0.25);
+        background: rgba(255, 255, 255, 1);
 
         @media (min-width: 768px) {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(90, 74, 58, 0.25);
         }
     }
 
     &.is-attending {
-        background-color: rgba(0, 128, 0, 0.1);
-        border-color: rgba(0, 128, 0, 0.2);
+        background-color: rgba(76, 175, 80, 0.1);
+        border-color: rgba(76, 175, 80, 0.3);
     }
 
     &.not-attending {
-        background-color: rgba(255, 0, 0, 0.1);
-        border-color: rgba(255, 0, 0, 0.2);
+        background-color: rgba(244, 67, 54, 0.1);
+        border-color: rgba(244, 67, 54, 0.3);
     }
 }
 </style>

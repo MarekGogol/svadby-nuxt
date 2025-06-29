@@ -35,7 +35,7 @@ await galleryStore.fetchPhotos(1);
 .section-title {
     font-family: 'Times New Roman', serif;
     font-size: 1.25rem;
-    color: #8B7355;
+    color: #5a4a3a;
     text-align: center;
     margin-bottom: 1.5rem;
     font-weight: normal;
@@ -51,7 +51,7 @@ await galleryStore.fetchPhotos(1);
         top: 50%;
         width: 60px;
         height: 1px;
-        background: rgba(180, 160, 120, 0.3);
+        background: rgba(139, 115, 85, 0.3);
         display: none;
 
         @media (min-width: 768px) {

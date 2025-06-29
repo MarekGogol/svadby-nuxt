@@ -45,7 +45,7 @@ const updateAttendance = async (attendance) => {
 .guest-header {
     text-align: center;
     padding: 0 0 1.5rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(168, 144, 132, 0.2);
     margin-bottom: 2rem;
 
     @media (min-width: 768px) {
@@ -60,7 +60,7 @@ const updateAttendance = async (attendance) => {
         font-size: 1.5rem;
         font-weight: normal;
         margin-bottom: 1rem;
-        color: #000;
+        color: #5a4a3a;
 
         @media (min-width: 768px) {
             font-size: 2rem;
@@ -73,7 +73,7 @@ const updateAttendance = async (attendance) => {
     .attendance-status {
         font-family: 'Times New Roman', serif;
         font-size: 1rem;
-        color: #666;
+        color: #8b7355;
         font-style: italic;
 
         @media (min-width: 768px) {
@@ -85,7 +85,7 @@ const updateAttendance = async (attendance) => {
 .guest-prompt {
     font-family: 'Times New Roman', serif;
     font-size: 1.1rem;
-    color: #666;
+    color: #8b7355;
     font-style: italic;
     padding: 0 1rem;
 
@@ -107,15 +107,16 @@ const updateAttendance = async (attendance) => {
     .btn-attendance {
         font-family: 'Times New Roman', serif;
         padding: 0.5rem 1rem;
-        border: 1px solid #ddd;
-        background: transparent;
-        color: #666;
+        border: 1px solid rgba(168, 144, 132, 0.4);
+        background: rgba(255, 255, 255, 0.8);
+        color: #8b7355;
         cursor: pointer;
         transition: all 0.3s;
         font-size: 0.85rem;
         letter-spacing: 0.1rem;
         flex: 1;
         max-width: 150px;
+        border-radius: 6px;
 
         @media (min-width: 768px) {
             padding: 0.5rem 2rem;
@@ -124,13 +125,14 @@ const updateAttendance = async (attendance) => {
         }
 
         &:hover {
-            border-color: #000;
-            color: #000;
+            border-color: #5a4a3a;
+            color: #5a4a3a;
+            background: rgba(255, 255, 255, 0.95);
         }
 
         &.active {
-            background: #000;
-            border-color: #000;
+            background: #5a4a3a;
+            border-color: #5a4a3a;
             color: white;
         }
     }

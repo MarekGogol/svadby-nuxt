@@ -107,13 +107,14 @@ onUnmounted(() => {
 
 .photobook {
     width: 100%;
-    background: #f8f8f8;
+    background: rgba(255, 255, 255, 0.6);
     padding: 0.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(90, 74, 58, 0.1);
 
     @media (min-width: 768px) {
         padding: 2rem;
+        border-radius: 16px;
     }
 }
 
@@ -131,7 +132,7 @@ onUnmounted(() => {
 .loading-wrapper {
     text-align: center;
     padding: 1rem;
-    color: #666;
+    color: #8b7355;
     font-family: 'Times New Roman', serif;
     font-size: 0.9rem;
 

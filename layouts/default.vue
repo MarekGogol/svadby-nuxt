@@ -56,6 +56,7 @@ const formatSideText = () => {
     position: relative;
     display: flex;
     padding: 0;
+    background-color: #f6f1f0;
 }
 
 .side-text {
@@ -65,7 +66,7 @@ const formatSideText = () => {
     transform: translateY(-50%) rotate(-90deg);
     font-family: 'Times New Roman', serif;
     font-size: 1rem;
-    color: #999;
+    color: #a89084;
     letter-spacing: 0.5rem;
     white-space: nowrap;
     display: none;
@@ -99,7 +100,7 @@ header {
     .date {
         font-family: 'Times New Roman', serif;
         font-size: 0.75rem;
-        color: #999;
+        color: #a89084;
         letter-spacing: 0.25rem;
         margin-bottom: 1.5rem;
 
@@ -113,7 +114,7 @@ header {
         font-family: 'Times New Roman', serif;
         font-size: 2.5rem;
         line-height: 1.2;
-        color: #000;
+        color: #5a4a3a;
         font-weight: normal;
 
         @media (min-width: 768px) {
@@ -123,10 +124,13 @@ header {
 }
 
 .content {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
     border: none;
     max-width: 800px;
     margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(90, 74, 58, 0.08);
+    backdrop-filter: blur(10px);
 }
 
 .page-content {

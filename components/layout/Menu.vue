@@ -25,9 +25,11 @@
     justify-content: center;
     gap: 1rem;
     padding: 1rem;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-top: 1px solid rgba(168, 144, 132, 0.2);
+    border-bottom: 1px solid rgba(168, 144, 132, 0.2);
     flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 12px 12px 0 0;
 
     @media (min-width: 768px) {
         gap: 2rem;
@@ -38,7 +40,7 @@
     .nav-link {
         font-family: 'Times New Roman', serif;
         font-size: 0.75rem;
-        color: #999;
+        color: #a89084;
         text-decoration: none;
         letter-spacing: 0.15rem;
         transition: all 0.3s;
@@ -53,14 +55,14 @@
 
         &:hover,
         &.router-link-active {
-            color: #000;
+            color: #5a4a3a;
         }
     }
 
     .divider {
         width: 1px;
         height: 1rem;
-        background-color: #eee;
+        background-color: rgba(168, 144, 132, 0.3);
         display: none;
 
         @media (min-width: 768px) {

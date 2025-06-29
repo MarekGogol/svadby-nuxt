@@ -162,11 +162,12 @@ const handleDrop = (event) => {
     .title-input {
         width: 100%;
         padding: 0.5rem 0.75rem;
-        border: 1px solid #ddd;
-        border-radius: 0.5rem;
+        border: 1px solid rgba(168, 144, 132, 0.3);
+        border-radius: 8px;
         font-family: 'Lato', sans-serif;
         font-size: 0.9rem;
         transition: all 0.3s;
+        background: rgba(255, 255, 255, 0.9);
 
         @media (min-width: 768px) {
             padding: 0.75rem 1rem;
@@ -175,18 +176,19 @@ const handleDrop = (event) => {
 
         &:focus {
             outline: none;
-            border-color: #49454f;
-            box-shadow: 0 0 0 2px rgba(#49454f, 0.1);
+            border-color: #5a4a3a;
+            box-shadow: 0 0 0 2px rgba(90, 74, 58, 0.1);
+            background: rgba(255, 255, 255, 1);
         }
 
         &::placeholder {
-            color: #999;
+            color: #a89084;
         }
     }
 
     .upload-area {
-        border: 2px dashed #ccd0d5;
-        border-radius: 0.75rem;
+        border: 2px dashed rgba(168, 144, 132, 0.4);
+        border-radius: 12px;
         padding: 1rem;
         text-align: center;
         cursor: pointer;
@@ -195,22 +197,24 @@ const handleDrop = (event) => {
         display: flex;
         align-items: center;
         justify-content: center;
+        background: rgba(255, 255, 255, 0.6);
 
         @media (min-width: 768px) {
-            border-radius: 1rem;
+            border-radius: 16px;
             padding: 2rem;
             min-height: 200px;
         }
 
         &:hover:not(.uploading) {
-            background-color: rgba(#49454f, 0.03);
-            border-color: #49454f;
+            background: rgba(255, 255, 255, 0.8);
+            border-color: #5a4a3a;
         }
 
         &.uploading {
             cursor: default;
             border-style: solid;
-            border-color: #49454f;
+            border-color: #5a4a3a;
+            background: rgba(255, 255, 255, 0.9);
         }
     }
 
@@ -231,7 +235,7 @@ const handleDrop = (event) => {
         }
 
         p {
-            color: #666;
+            color: #8b7355;
             margin: 0;
             font-size: 0.9rem;
 
@@ -264,7 +268,7 @@ const handleDrop = (event) => {
         .progress-bar {
             flex: 1;
             height: 6px;
-            background: #eee;
+            background: rgba(168, 144, 132, 0.2);
             border-radius: 3px;
             overflow: hidden;
 
@@ -276,13 +280,13 @@ const handleDrop = (event) => {
 
         .progress-fill {
             height: 100%;
-            background: #49454f;
+            background: #5a4a3a;
             transition: width 0.3s ease;
         }
 
         .progress-text {
             font-size: 0.85rem;
-            color: #666;
+            color: #8b7355;
             min-width: 3rem;
 
             @media (min-width: 768px) {
@@ -293,7 +297,7 @@ const handleDrop = (event) => {
 
         .selected-file {
             font-size: 0.85rem;
-            color: #666;
+            color: #8b7355;
 
             @media (min-width: 768px) {
                 font-size: 0.9rem;

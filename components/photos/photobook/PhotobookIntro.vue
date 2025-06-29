@@ -56,9 +56,11 @@ const scrollToUploadSection = () => {
     text-align: center;
     background: linear-gradient(
         to bottom,
-        rgba(248, 248, 248, 0.8),
-        rgba(255, 255, 255, 0.8)
+        rgba(255, 255, 255, 0.6),
+        rgba(255, 255, 255, 0.4)
     );
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(90, 74, 58, 0.08);
 }
 
 .decorative-border {
@@ -79,12 +81,12 @@ const scrollToUploadSection = () => {
     }
 
     &::before {
-        border: 1px solid rgba(180, 160, 120, 0.2);
+        border: 1px solid rgba(139, 115, 85, 0.2);
         transform: scale(0.98);
     }
 
     &::after {
-        border: 1px solid rgba(180, 160, 120, 0.2);
+        border: 1px solid rgba(139, 115, 85, 0.2);
         transform: scale(1.02);
     }
 }
@@ -95,7 +97,7 @@ const scrollToUploadSection = () => {
 
 .ornament {
     font-size: 1.5rem;
-    color: rgba(180, 160, 120, 0.6);
+    color: rgba(139, 115, 85, 0.6);
     margin: 1rem 0;
 
     &.top {
@@ -111,7 +113,7 @@ const scrollToUploadSection = () => {
 .title {
     font-family: 'Times New Roman', serif;
     font-size: 1.75rem;
-    color: #8B7355;
+    color: #5a4a3a;
     margin-bottom: 1.5rem;
     font-weight: normal;
     letter-spacing: 0.1rem;
@@ -129,7 +131,7 @@ const scrollToUploadSection = () => {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        color: rgba(180, 160, 120, 0.4);
+        color: rgba(139, 115, 85, 0.4);
         font-size: 1.5rem;
 
         @media (min-width: 768px) {
@@ -149,7 +151,7 @@ const scrollToUploadSection = () => {
 .description {
     font-family: 'Times New Roman', serif;
     font-size: 1rem;
-    color: #666;
+    color: #8b7355;
     line-height: 1.8;
     font-style: italic;
     margin-bottom: 2rem;
@@ -165,10 +167,10 @@ const scrollToUploadSection = () => {
     align-items: center;
     gap: 1rem;
     padding: 0.75rem 2rem;
-    background: #8B7355;
+    background: #5a4a3a;
     color: white;
     border: none;
-    border-radius: 2px;
+    border-radius: 8px;
     font-family: 'Times New Roman', serif;
     font-size: 1rem;
     cursor: pointer;
@@ -198,9 +200,9 @@ const scrollToUploadSection = () => {
     }
 
     &:hover {
-        background: darken(#8B7355, 5%);
+        background: #4a3a2a;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(139, 115, 85, 0.2);
+        box-shadow: 0 4px 12px rgba(90, 74, 58, 0.3);
 
         .button-ornament {
             transform: rotate(180deg);
@@ -238,7 +240,7 @@ const scrollToUploadSection = () => {
         position: absolute;
         width: 40px;
         height: 1px;
-        background: rgba(180, 160, 120, 0.3);
+        background: rgba(139, 115, 85, 0.3);
         top: 50%;
         display: none;
 
@@ -269,7 +271,7 @@ const scrollToUploadSection = () => {
 
     .icon {
         font-size: 1.5rem;
-        color: rgba(180, 160, 120, 0.8);
+        color: rgba(139, 115, 85, 0.8);
         
         @media (min-width: 768px) {
             font-size: 1.75rem;
@@ -279,7 +281,7 @@ const scrollToUploadSection = () => {
     .text {
         font-family: 'Times New Roman', serif;
         font-size: 0.9rem;
-        color: #8B7355;
+        color: #5a4a3a;
         text-align: center;
         line-height: 1.6;
         font-style: italic;

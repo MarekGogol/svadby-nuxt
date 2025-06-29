@@ -79,7 +79,7 @@ const formatTime = (dateTimeStr) => {
             transform: translateX(-50%);
             width: 60px;
             height: 1px;
-            background: #ddd;
+            background: rgba(139, 115, 85, 0.3);
         }
 
         &::before {
@@ -104,7 +104,7 @@ const formatTime = (dateTimeStr) => {
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
-                color: #ddd;
+                color: rgba(139, 115, 85, 0.4);
                 font-size: 1.2rem;
             }
 
@@ -120,7 +120,7 @@ const formatTime = (dateTimeStr) => {
         .day-number {
             font-family: 'Times New Roman', serif;
             font-size: 1.75rem;
-            color: #333;
+            color: #5a4a3a;
             font-weight: normal;
             letter-spacing: 0.1rem;
         }
@@ -128,7 +128,7 @@ const formatTime = (dateTimeStr) => {
         .date {
             font-family: 'Times New Roman', serif;
             font-size: 1rem;
-            color: #999;
+            color: #a89084;
             letter-spacing: 0.2rem;
             text-transform: uppercase;
         }
@@ -144,7 +144,7 @@ const formatTime = (dateTimeStr) => {
         grid-template-columns: 100px 1fr;
         gap: 2rem;
         padding: 2rem 0;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid rgba(168, 144, 132, 0.2);
 
         &:last-child {
             border-bottom: none;
@@ -153,14 +153,14 @@ const formatTime = (dateTimeStr) => {
         .time {
             font-family: 'Times New Roman', serif;
             font-size: 0.875rem;
-            color: #999;
+            color: #a89084;
         }
 
         .details {
             h3 {
                 font-family: 'Times New Roman', serif;
                 font-size: 1.25rem;
-                color: #000;
+                color: #5a4a3a;
                 margin-bottom: 0.5rem;
                 font-weight: normal;
             }
@@ -168,7 +168,7 @@ const formatTime = (dateTimeStr) => {
             p {
                 font-family: 'Times New Roman', serif;
                 font-size: 1rem;
-                color: #666;
+                color: #8b7355;
                 line-height: 1.5;
             }
         }
