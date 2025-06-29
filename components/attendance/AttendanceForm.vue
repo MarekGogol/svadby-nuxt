@@ -68,23 +68,23 @@ const submitAttendance = () => {
     box-shadow: 
         0 20px 40px rgba(90, 74, 58, 0.1),
         0 8px 16px rgba(90, 74, 58, 0.05);
-    padding: 1.5rem 2rem;
+    padding: 1.25rem 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.8);
 
     @media (min-width: 768px) {
-        padding: 4rem 3rem;
+        padding: 2.5rem 2.5rem;
     }
 }
 
 .attendees-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
 
     @media (min-width: 768px) {
-        gap: 2.5rem;
-        margin-bottom: 3rem;
+        gap: 1.75rem;
+        margin-bottom: 2rem;
     }
 }
 </style>

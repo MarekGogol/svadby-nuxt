@@ -70,7 +70,7 @@ const handleRemove = () => {
     background: rgba(255, 255, 255, 0.7);
     border: 1px solid rgba(168, 144, 132, 0.2);
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1.25rem;
     transition: all 0.3s ease;
     position: relative;
 
@@ -81,7 +81,7 @@ const handleRemove = () => {
     }
 
     @media (min-width: 768px) {
-        padding: 2.5rem;
+        padding: 1.75rem;
     }
 }
 
@@ -89,24 +89,28 @@ const handleRemove = () => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+
+    @media (min-width: 768px) {
+        margin-bottom: 1.25rem;
+    }
 }
 
 .guest-number {
     font-family: 'Playfair Display', serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #8b7355;
     font-weight: 500;
     letter-spacing: 0.05rem;
 
     @media (min-width: 768px) {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 }
 
 .remove-button {
-    width: 2rem;
-    height: 2rem;
+    width: 1.75rem;
+    height: 1.75rem;
     border-radius: 50%;
     border: 1px solid rgba(231, 76, 60, 0.3);
     background: rgba(231, 76, 60, 0.1);
@@ -116,7 +120,17 @@ const handleRemove = () => {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0;
+
+    span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
 
     &:hover {
         background: #e74c3c;
@@ -125,46 +139,46 @@ const handleRemove = () => {
     }
 
     @media (min-width: 768px) {
-        width: 2.5rem;
-        height: 2.5rem;
-        font-size: 1.4rem;
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.2rem;
     }
 }
 
 .card-content {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 
     @media (min-width: 768px) {
-        gap: 2rem;
+        gap: 1.25rem;
     }
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.4rem;
 }
 
 .input-label {
     font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #5a4a3a;
     font-weight: 500;
     letter-spacing: 0.02rem;
 
     @media (min-width: 768px) {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 }
 
 .elegant-input {
-    padding: 1rem 1.25rem;
+    padding: 0.75rem 1rem;
     border: 2px solid rgba(168, 144, 132, 0.2);
-    border-radius: 12px;
+    border-radius: 10px;
     font-family: 'Playfair Display', serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     background: rgba(255, 255, 255, 0.8);
     transition: all 0.3s ease;
     color: #5a4a3a;
@@ -192,8 +206,8 @@ const handleRemove = () => {
     }
 
     @media (min-width: 768px) {
-        padding: 1.25rem 1.5rem;
-        font-size: 1.05rem;
+        padding: 0.875rem 1.25rem;
+        font-size: 0.95rem;
     }
 }
 </style>

@@ -34,29 +34,33 @@ const handleSubmit = () => {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem;
+
+    @media (min-width: 768px) {
+        gap: 2rem;
+    }
 }
 
 .submit-ornament {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: rgba(139, 115, 85, 0.4);
     
     @media (min-width: 768px) {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 }
 
 .submit-button {
     display: inline-flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1.25rem 3rem;
+    gap: 0.875rem;
+    padding: 1rem 2.5rem;
     background: linear-gradient(135deg, #5a4a3a, #4a3a2a);
     color: white;
     border: none;
     border-radius: 12px;
     font-family: 'Lato', sans-serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -96,12 +100,12 @@ const handleSubmit = () => {
 
     .submit-icon {
         transition: transform 0.3s ease;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     @media (min-width: 768px) {
-        padding: 1.5rem 4rem;
-        font-size: 1.1rem;
+        padding: 1.25rem 3.5rem;
+        font-size: 1rem;
     }
 }
 </style>

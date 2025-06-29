@@ -18,13 +18,13 @@ const handleAdd = () => {
 <style lang="scss" scoped>
 .add-guest-section {
     text-align: center;
-    margin-bottom: 3rem;
-    padding: 2rem 0;
+    margin-bottom: 2rem;
+    padding: 1.5rem 0;
     border-top: 1px solid rgba(168, 144, 132, 0.1);
     border-bottom: 1px solid rgba(168, 144, 132, 0.1);
 
     @media (min-width: 768px) {
-        margin-bottom: 4rem;
+        margin-bottom: 2.5rem;
     }
 }
 
@@ -32,12 +32,12 @@ const handleAdd = () => {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 1rem 2rem;
+    padding: 0.875rem 1.75rem;
     background: linear-gradient(135deg, rgba(139, 115, 85, 0.1), rgba(168, 144, 132, 0.1));
     border: 2px dashed rgba(139, 115, 85, 0.3);
     border-radius: 12px;
     font-family: 'Lato', sans-serif;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #5a4a3a;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -51,13 +51,13 @@ const handleAdd = () => {
     }
 
     .btn-icon {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: bold;
     }
 
     @media (min-width: 768px) {
-        padding: 1.25rem 2.5rem;
-        font-size: 1rem;
+        padding: 1rem 2rem;
+        font-size: 0.95rem;
         gap: 1rem;
     }
 }
