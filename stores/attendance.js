@@ -6,8 +6,6 @@ export const useAttendanceStore = defineStore('attendance', {
         isSubmitted: false
     }),
 
-    persist: true,
-
     actions: {
         addAttendee() {
             this.attendees.push({
