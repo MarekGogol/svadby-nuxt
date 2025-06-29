@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     gap: 1.5rem;
 
     @media (min-width: 768px) {
