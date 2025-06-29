@@ -88,12 +88,12 @@ const formatSideText = () => {
 
 header {
     text-align: center;
-    margin-bottom: 2rem;
-    padding: 2rem 1rem;
+    margin-bottom: 1rem;
+    padding: 2rem 1rem 1rem;
 
     @media (min-width: 768px) {
-        margin-bottom: 4rem;
-        padding: 4rem 1rem;
+        margin-bottom: 1.5rem;
+        padding: 4rem 1rem 1.5rem;
     }
 
     .date {
