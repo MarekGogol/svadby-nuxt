@@ -2,7 +2,7 @@
     <div class="attendance-page">
         <div class="page-header">
             <p class="page-description">
-                {{ __('Prosím, potvrďte svoju účasť na našej svadbe. Môžete pridať viacero osôb naraz.') }}
+                {{ __('Prosíme o potvrdenie Vašej účasti.') }}
             </p>
         </div>
 
