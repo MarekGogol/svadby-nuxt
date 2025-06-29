@@ -105,7 +105,7 @@ header {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0rem;
 
         @media (min-width: 768px) {
             margin-bottom: 0.75rem;
