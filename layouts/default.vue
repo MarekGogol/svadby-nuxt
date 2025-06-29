@@ -105,25 +105,25 @@ header {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.5rem;
 
         @media (min-width: 768px) {
-            margin-bottom: 2rem;
+            margin-bottom: 0.75rem;
         }
     }
 
     .logo {
-        max-width: 200px;
+        max-width: 100px;
         height: auto;
         opacity: 0.9;
         transition: all 0.3s ease;
 
         @media (min-width: 768px) {
-            max-width: 300px;
+            max-width: 150px;
         }
 
         @media (min-width: 1024px) {
-            max-width: 400px;
+            max-width: 200px;
         }
 
         &:hover {
