@@ -11,8 +11,8 @@
     height: 50vh;
     min-height: 350px;
     background-image: url('/images/A7407803.jpg');
-    background-size: cover;
-    background-position: center;
+    background-size: contain;
+    background-position: top center;
     background-attachment: fixed;
     display: flex;
     align-items: center;
@@ -40,11 +40,11 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 10%;
+    height: 30%;
     background: linear-gradient(
         to bottom,
         transparent 0%,
-        rgba(246, 241, 240, 0.2) 20%,
+        rgba(246, 241, 240, 0.4) 20%,
         rgba(246, 241, 240, 0.5) 50%,
         rgba(246, 241, 240, 0.8) 80%,
         #f6f1f0 100%

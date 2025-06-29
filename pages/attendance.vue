@@ -73,7 +73,7 @@ const resetForm = () => {
 .main-content {
     position: relative;
     z-index: 3;
-    margin-top: -80px;
+    margin-top: -6.5rem;
     padding: 0 1rem 3rem;
 
     @media (min-width: 768px) {
