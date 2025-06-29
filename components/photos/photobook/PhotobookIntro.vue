@@ -1,17 +1,19 @@
 <template>
     <div v-if="!isHidden" class="photobook-intro">
-        <div class="decorative-border">
-            <div class="intro-content">
-                <div class="ornament top">❦</div>
-                <h1 class="title">{{ __('Naša svadobná fotokniha') }}</h1>
-                <p class="description">
-                    {{ __('Vytvorte s nami nezabudnuteľnú svadobnú fotoknihu. Každá fotografia, ktorú nahráte, sa stane súčasťou našich spoločných spomienok.') }}
-                </p>
-                <button class="cta-button" @click="handleClick">
-                    <span class="button-text">{{ __('Pridať fotografie') }}</span>
-                    <span class="button-ornament">❧</span>
-                </button>
-                <div class="ornament bottom">❦</div>
+        <div class="content-wrapper">
+            <div class="decorative-border">
+                <div class="intro-content">
+                    <div class="ornament top">❦</div>
+                    <h1 class="title">{{ __('Naša svadobná fotokniha') }}</h1>
+                    <p class="description">
+                        {{ __('Vytvorte s nami nezabudnuteľnú svadobnú fotoknihu. Každá fotografia, ktorú nahráte, sa stane súčasťou našich spoločných spomienok.') }}
+                    </p>
+                    <button class="cta-button" @click="handleClick">
+                        <span class="button-text">{{ __('Pridať fotografie') }}</span>
+                        <span class="button-ornament">❧</span>
+                    </button>
+                    <div class="ornament bottom">❦</div>
+                </div>
             </div>
         </div>
     </div>
@@ -54,13 +56,21 @@ const scrollToUploadSection = () => {
     padding: 1rem 1rem;
     margin-bottom: 2rem;
     text-align: center;
-    background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.6),
-        rgba(255, 255, 255, 0.4)
-    );
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(90, 74, 58, 0.08);
+}
+
+.content-wrapper {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 40px rgba(90, 74, 58, 0.1),
+        0 8px 16px rgba(90, 74, 58, 0.05);
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    @media (min-width: 768px) {
+        padding: 3rem;
+    }
 }
 
 .decorative-border {
