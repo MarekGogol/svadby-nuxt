@@ -1,9 +1,9 @@
 <template>
     <nav class="navigation">
-        <NuxtLink to="/" class="nav-link">
-            {{ __('Domov') }}
+        <!-- <NuxtLink to="/gallery" class="nav-link">
+            {{ __('Fotogaléria') }}
         </NuxtLink>
-        <span class="divider"></span>
+        <span class="divider"></span> -->
         <NuxtLink to="/photobook" class="nav-link">
             {{ __('Fotokniha') }}
         </NuxtLink>
