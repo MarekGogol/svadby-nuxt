@@ -1,7 +1,7 @@
 <template>
     <div class="form-header">
         <div class="decorative-line"></div>
-        <h2 class="form-title">{{ __('Prosím, potvrdte svoju účašt') }}</h2>
+        <h2 class="form-title">{{ __('Potvrdenie účasti') }}</h2>
         <div class="decorative-line"></div>
     </div>
 </template>
