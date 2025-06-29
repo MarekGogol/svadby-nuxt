@@ -98,7 +98,7 @@ header {
 
     @media (min-width: 768px) {
         margin-bottom: 1.5rem;
-        padding: 4rem 1rem 1.5rem;
+        padding: 0rem 1rem 1.5rem;
     }
 
     .logo-container {
