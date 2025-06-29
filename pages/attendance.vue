@@ -9,8 +9,7 @@
 
         <div v-if="!attendanceStore.isSubmitted" class="attendance-form">
             <div class="form-section">
-                <h2 class="section-title">{{ __('Pridať účastníkov') }}</h2>
-                
+               
                 <div class="attendees-list">
                     <div 
                         v-for="(attendee, index) in attendanceStore.attendees" 
