@@ -139,6 +139,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Bottom gradient to blend with background -->
+        <div class="bottom-gradient"></div>
     </div>
 </template>
 
@@ -182,12 +185,13 @@ const resetForm = () => {
 .attendance-page {
     min-height: 100vh;
     background: linear-gradient(135deg, #f6f1f0 0%, #ede3e0 100%);
+    position: relative;
 }
 
 .hero-section {
     position: relative;
-    height: 60vh;
-    min-height: 400px;
+    height: 50vh;
+    min-height: 350px;
     background-image: url('/images/A7407803.jpg');
     background-size: cover;
     background-position: center;
@@ -198,8 +202,8 @@ const resetForm = () => {
     overflow: hidden;
 
     @media (max-width: 768px) {
-        height: 50vh;
-        min-height: 300px;
+        height: 40vh;
+        min-height: 280px;
         background-attachment: scroll;
     }
 }
@@ -210,13 +214,8 @@ const resetForm = () => {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        135deg,
-        rgba(90, 74, 58, 0.7) 0%,
-        rgba(139, 115, 85, 0.6) 50%,
-        rgba(168, 144, 132, 0.5) 100%
-    );
-    backdrop-filter: blur(1px);
+    background: linear-gradient(135deg, rgb(0 0 0 / 70%) 0%, rgb(97 89 79 / 60%) 50%, rgb(193 173 163 / 50%) 100%);
+    backdrop-filter: blur(0.5px);
 }
 
 .hero-content {
@@ -224,67 +223,71 @@ const resetForm = () => {
     z-index: 2;
     text-align: center;
     color: white;
-    padding: 2rem;
+    padding: 1.5rem;
     max-width: 600px;
+
+    @media (min-width: 768px) {
+        padding: 2rem;
+    }
 }
 
 .hero-ornament {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
     opacity: 0.8;
     
     &.bottom {
-        margin-top: 1rem;
+        margin-top: 0.8rem;
         margin-bottom: 0;
         transform: rotate(180deg);
     }
 
     @media (min-width: 768px) {
-        font-size: 2.5rem;
-        margin-bottom: 1.5rem;
+        font-size: 2.2rem;
+        margin-bottom: 1.2rem;
         
         &.bottom {
-            margin-top: 1.5rem;
+            margin-top: 1.2rem;
         }
     }
 }
 
 .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: normal;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     letter-spacing: 0.1rem;
 
     @media (min-width: 768px) {
-        font-size: 3.5rem;
-        margin-bottom: 1.5rem;
+        font-size: 3.2rem;
+        margin-bottom: 1.2rem;
     }
 }
 
 .hero-subtitle {
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-style: italic;
     opacity: 0.95;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     line-height: 1.6;
 
     @media (min-width: 768px) {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 }
 
 .main-content {
     position: relative;
     z-index: 3;
-    margin-top: -100px;
+    margin-top: -80px;
     padding: 0 1rem 3rem;
 
     @media (min-width: 768px) {
         padding: 0 2rem 4rem;
-        margin-top: -120px;
+        margin-top: -100px;
     }
 }
 
@@ -835,5 +838,22 @@ const resetForm = () => {
         padding: 1.25rem 3rem;
         font-size: 1rem;
     }
+}
+
+.bottom-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(246, 241, 240, 0.3) 30%,
+        rgba(246, 241, 240, 0.8) 70%,
+        #f6f1f0 100%
+    );
+    pointer-events: none;
+    z-index: 1;
 }
 </style>

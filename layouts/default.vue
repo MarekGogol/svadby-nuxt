@@ -167,10 +167,10 @@ header {
 }
 
 .page-content {
-    padding: 1rem;
+    padding: 0rem;
 
     @media (min-width: 768px) {
-        padding: 3rem;
+        padding: 0rem;
     }
 }
 </style>
