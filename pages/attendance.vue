@@ -8,8 +8,7 @@
         </div>
 
         <div v-if="!attendanceStore.isSubmitted" class="attendance-form">
-            <div class="form-section">
-               
+            <div class="form-section">               
                 <div class="attendees-list">
                     <div 
                         v-for="(attendee, index) in attendanceStore.attendees" 
